@@ -1,164 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>LMS Dashboard</title>
-<style>
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f4f6f8;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Institute - Advanced Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #3b82f6;
+            --accent: #6dc854;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg: #f1f5f9;
+        }
 
-/* HEADER */
-.header{
-  background:#1e293b;
-  color:white;
-  padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #334155; }
 
-/* MENU */
-.menu{
-  display:flex;
-  gap:10px;
-  background:#e2e8f0;
-  padding:10px;
-}
-.menu button{
-  padding:10px 15px;
-  border:none;
-  cursor:pointer;
-  background:white;
-  border-radius:5px;
-  font-weight:bold;
-}
-.menu button:hover{
-  background:#cbd5e1;
-}
+        /* Navigation */
+        nav { background: var(--primary); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { color: white; font-size: 1.5rem; font-weight: bold; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.9rem; }
 
-/* CONTENT */
-.content{
-  padding:20px;
-}
-.section{
-  display:none;
-  background:white;
-  padding:20px;
-  border-radius:8px;
-  box-shadow:0 0 5px #ccc;
-}
+        /* Hero */
+        .hero { background: linear-gradient(45deg, #1e293b, #3b82f6); color: white; padding: 60px 5%; text-align: center; }
 
-/* DEFAULT SHOW */
-.section.active{
-  display:block;
-}
-</style>
+        /* Stats Bar */
+        .stats-bar { display: flex; justify-content: space-around; background: white; padding: 20px; width: 80%; margin: -30px auto 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; }
+        .stat-item h2 { color: var(--secondary); margin: 0; }
+        .stat-item p { margin: 0; font-size: 0.8rem; color: #64748b; }
+
+        /* Main Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+        .card { background: white; padding: 25px; border-radius: 15px; text-align: center; transition: 0.3s; border-bottom: 4px solid #ddd; }
+        .card:hover { transform: translateY(-10px); border-bottom-color: var(--secondary); }
+        .icon { font-size: 2.5rem; margin-bottom: 15px; }
+
+        /* Form elements */
+        select { width: 100%; padding: 10px; margin: 15px 0; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-blue { background: var(--secondary); }
+        .btn-red { background: var(--danger); }
+
+        /* Testimonials Section */
+        .test-section { background: #fff; padding: 50px 5%; margin-top: 50px; text-align: center; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 30px; }
+        .test-card { padding: 20px; border-left: 4px solid var(--accent); background: #f8fafc; text-align: left; font-style: italic; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 40px 5%; margin-top: 50px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .footer-bottom { text-align: center; margin-top: 30px; border-top: 1px solid #334155; padding-top: 20px; font-size: 0.8rem; }
+    </style>
 </head>
+<body>
 
-<body oncontextmenu="return false">
-  
-  <!-- HEADER -->
-  <div class="header">
-    <h2>LSCTI LIBBRARY</h2>
-    <span>Welcome, Student</span>
-  </div>
-  
-  <!-- MENU -->
-  <div class="menu">
-    <button onclick="showSection('notes')">📘 Notes</button>
-    <button onclick="showSection('syllabus')">📑 Syllabus</button>
-    <button onclick="showSection('projects')">🛠 Projects</button>
-    <button onclick="showSection('material')">📂 Study Material</button>
-  </div>
-  
-  <!-- CONTENT -->
-  <div class="content">
-    
-    <div id="notes" class="section active">
-      <h3>Notes Section</h3>
-      <div class="notes-layout">
-      
-        <!-- LEFT SOFTWARE LIST -->
-        <div class="software-list">
-          <ul>
-            <li onclick="openNote('notepad')">Notepad</li>
-            <li onclick="openNote('wordpad')">WordPad</li>
-            <li onclick="openNote('paint')">Paint</li>
-            <li onclick="openNote('cmd')">DOS (CMD)</li>
-            <li onclick="openNote('word')">MS Word</li>
-            <li onclick="openNote('excel')">MS Excel</li>
-            <li onclick="openNote('ppt')">MS PowerPoint</li>
-            <li onclick="openNote('access')">MS Access</li>
-            <li onclick="openNote('python')">Python</li>
-            <li onclick="openNote('cpp')">C / C++</li>
-            <li onclick="openNote('tally')">Tally</li>
-            <li onclick="openNote('html')">HTML</li>
-            <li onclick="openNote('css')">CSS</li>
-            <li onclick="openNote('js')">JavaScript</li>
-            <li onclick="openNote('php')">PHP</li>
-            <li onclick="openNote('shortcuts')">Shortcut Keys</li>
-            <li onclick="openNote('fundamentals')">Computer Fundamentals</li>
-            <li onclick="openNote('stats')">Statistics</li>
-          </ul>
-        </div>
-      
-        <!-- RIGHT NOTES CONTENT -->
-        <div class="note-content" id="noteContent">
-          <h3>Select a software to view notes</h3>
-        </div>
-      
-      </div>
+<nav>
+    <div class="logo"><u>LSCTI</u></div>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Courses</a>
+        <a href="#">Contact</a>
+        <a href="#" style="background:var(--accent); padding:8px 15px; border-radius:5px;">Login</a>
     </div>
-    
-  <div id="syllabus" class="section">
-    <h3>Syllabus Section</h3>
-    <p>
-      • Computer Fundamentals<br>
-      • Web Designing<br>
-      • MS Office<br>
-      • Programming Basics
-    </p>
-  </div>
+</nav>
 
-  <div id="projects" class="section">
-    <h3>Projects Section</h3>
-    <ul>
-      <li>Personal Portfolio Website</li>
-      <li>Calculator using JS</li>
-      <li>Student Result System</li>
-    </ul>
-  </div>
+<section class="hero">
+    <h1>Life set computer traning institute</h1>
+    <p>Empowering Students with Premium Resources & Practice Sets</p>
+</section>
 
-  <div id="material" class="section">
-    <h3>Study Material</h3>
-    <ul>
-      <li>Shortcut Keys</li>
-      <li>Interview Questions</li>
-      <li>Practice Worksheets</li>
-    </ul>
-  </div>
-
+<div class="stats-bar">
+    <div class="stat-item"><h2>50+</h2><p>Notes PDF</p></div>
+    <div class="stat-item"><h2>20+</h2><p>Projects</p></div>
+    <div class="stat-item"><h2>20+</h2><p>quention paper</p></div>
+    <div class="stat-item"><h2>100%</h2><p>Free Access</p></div>
 </div>
 
-<script>
-function showSection(id){
-  let sections=document.querySelectorAll('.section');
-  sections.forEach(sec=>sec.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <div class="icon" style="color: #2fdd8f;"><i class="fas fa-book"></i></div>
+            <h3>Study Notes</h3>
+            <select><option>Select Topic</option><option>Python</option><option>Tally</option><option>Excel</option></select>
+            <button class="btn btn-blue">VISIT</button>
+        </div>
 
-// basic download protection
-document.addEventListener("keydown",function(e){
-  if(e.ctrlKey && (e.key==="s" || e.key==="p")){
-    e.preventDefault();
-  }
-});
-</script>
+        <div class="card">
+            <div class="icon" style="color: #f59e0b;"><i class="fas fa-file-invoice"></i></div>
+            <h3>Syllabus</h3>
+            <select><option>Select Course</option><option>ADCA</option><option>DCA</option><option>Web Dev</option></select>
+            <button class="btn btn-blue">VISIT</button>
+        </div>
+
+        <div class="card">
+            <div class="icon" style="color: #a855f7;"><i class="fas fa-code"></i></div>
+            <h3>Projects</h3>
+            <select><option>Select Tech</option><option>HTML/CSS</option><option>PHP</option><option>Java</option></select>
+            <button class="btn btn-blue">VISIT</button>
+        </div>
+
+        <div class="card">
+            <div class="icon" style="color: #10b981;"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Study Material</h3>
+            <select><option>Select Topic</option><option>Interview</option><option>Shortcuts</option><option>Tips</option></select>
+            <button class="btn btn-blue">VISIT</button>
+        </div>
+
+        <div class="card" style="border-bottom-color: var(--danger);">
+            <div class="icon" style="color: var(--danger);"><i class="fas fa-question-circle"></i></div>
+            <h3>Old Papers</h3>
+            <select><option>Select Year</option><option>2023 Papers</option><option>2022 Papers</option><option>Model Sets</option></select>
+            <button class="btn btn-red">VISIT</button>
+        </div>
+    </div>
+</div>
+
+<section class="test-section">
+    <h2>Student Success Stories</h2>
+    <div class="test-grid">
+        <div class="test-card">
+            "The Python notes are very easy to understand. The project source code helped me pass my final exam with an A grade!"
+            <br><br><strong>- Rahul Sharma (ADCA Student)</strong>
+        </div>
+        <div class="test-card">
+            "Syllabus clarity is great. I exactly knew what to study for the CCC exam. Highly recommended library!"
+            <br><br><strong>- Priya Verma (CCC Aspirant)</strong>
+        </div>
+        <div class="test-card">
+            "Finding old question papers was so difficult before, but now it's just one click away. Best feature ever!"
+            <br><br><strong>- Amit Singh (Web Dev Student)</strong>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div>
+            <h3>About Library</h3>
+            <p>Providing high-quality computer education resources to every student of our institute for free.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <ul style="list-style:none; padding:0; line-height:2;">
+                <li><a href="#" style="color:#cbd5e1">Privacy Policy</a></li>
+                <li><a href="#" style="color:#cbd5e1">Terms of Use</a></li>
+                <li><a href="#" style="color:#cbd5e1">Request New Notes</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Connect With Us</h3>
+            <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/919910602752" target="_blank" style="color: white;">+91 9910602752</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:lifesetinstitute@gmail.com" style="color: white;">lifesetinstitute@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 Tech Institute Digital Library | All Rights Reserved
+    </div>
+</footer>
 
 </body>
 </html>
-
-
