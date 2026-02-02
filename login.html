@@ -82,8 +82,8 @@
     const err = document.getElementById('error');
 
     if (u === USER && p === PASS) {
-      localStorage.setItem('lscti_login', 'true');
-      window.location.href = 'faculties/index.html';
+      localStorage.setItem('lscti', 'true');
+      window.location.href = 'faculties/main.html';
     } else {
       err.textContent = 'Invalid username or password';
     }
