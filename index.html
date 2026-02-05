@@ -127,8 +127,7 @@
         <div class="card">
             <div class="icon" style="color: #10b981;"><i class="fas fa-graduation-cap"></i></div>
             <h3>Study Material <br> <h3 style="color: red;">Upcoming</h3> </h3>
-            <select><option>Select Topic</option><option>Interview</option><option>Shortcuts</option><option>Tips</option></select>
-            <button class="btn btn-blue">VISIT</button>
+            <button class="btn btn-blue" onclick="navigateToStudy()">Open</button>
         </div>
 
         <div class="card" style="border-bottom-color: var(--danger);">
@@ -224,6 +223,13 @@ function visitNotes() {
     } else {
         alert('Please select a topic first');
     }
+}
+
+function navigateToStudy() {
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        window.location.href = 'study material/01_Study.html';
+    }, 100);
 }
 </script>
 
