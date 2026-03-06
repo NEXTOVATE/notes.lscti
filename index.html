@@ -273,21 +273,24 @@
         </select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> PDF</button>
+          
         </div>
       </div>
       <div class="card fade-in">
         <div class="note-icon" style="background:linear-gradient(135deg,#f72585,#b5179e)"><i class="fas fa-paint-brush"></i></div>
-        <div class="note-title">Paint & Excel</div>
-        <div class="note-desc">MS Paint drawing tools. Excel formulas, charts, data analysis & statistics notes.</div>
+        <div class="note-title">Ms office</div>
+        <div class="note-desc">MS word, Excel formulas,Power point, charts, data analysis & statistics notes.</div>
         <select class="topic-select"><option value="">Select Topic</option>
+
+          <option value="notes/17_word.html">Word</option>
           <option value="notes/04_excel.html">Excel</option>
+          <option value="notes/04_excel.html">Power point</option>
           <option value="notes/07_charts.html">Types of Charts</option>
           <option value="notes/08_data analysis & statics.html">Data Analysis & Statistics</option>
         </select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> PDF</button>
+         
         </div>
       </div>
       <div class="card fade-in">
@@ -297,7 +300,7 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/05_tally.html">Tally Prime Full Notes</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> PDF</button>
+         
         </div>
       </div>
       <div class="card fade-in">
@@ -307,7 +310,7 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/06_python-cheetsheet.html">Python Cheatsheet</option><option value="notes/15_python notebok.html">Python Notebook</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> PDF</button>
+         
         </div>
       </div>
       <div class="card fade-in">
@@ -317,7 +320,7 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/10_html.html">HTML Full Notes</option><option value="notes/11_html-shortnotes.html">HTML Short Notes</option><option value="notes/13_css shortnotes.html">CSS Short Notes</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> PDF</button>
+          
         </div>
       </div>
       <div class="card fade-in">
@@ -327,7 +330,7 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/09_c.html">C Language</option><option value="notes/12_dos.html">DOS (CMD)</option><option value="notes/14_git cheetsheet.html">Git Cheatsheet</option><option value="notes/16_ms access.html">MS Access</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-download"></i> PDF</button>
+        
         </div>
       </div>
     </div>
@@ -369,7 +372,7 @@
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" style="background:var(--bg2)">
+<!-- <section id="projects" style="background:var(--bg2)">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-code"></i> Projects</div>
@@ -411,7 +414,7 @@
   </div>
 </section>
 
-<!-- QUESTION PAPERS -->
+QUESTION PAPERS
 <section id="papers">
   <div class="container">
     <div class="section-header fade-in">
@@ -443,7 +446,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- UPDATES -->
 <section id="updates">
@@ -682,6 +685,8 @@
     // open selected resource in new tab/window
     window.open(url, '_blank');
   }
+
+ 
 
   // CONTACT FORM
   function sendMsg(e) {
