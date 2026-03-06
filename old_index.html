@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life set computer traning institute</title>
+    <link rel="shortcut icon" href="images/favicon2.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="updates-box.css">
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #3b82f6;
+            --accent: #6dc854;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg: #f1f5f9;
+        }
+
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #334155; transition: opacity 0.5s ease; }
+        html { scroll-behavior: smooth; }
+
+        /* Navigation */
+        nav { background: var(--primary); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { color: white; font-size: 1.5rem; font-weight: bold; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 10px; font-size: 0.9rem; }
+
+        /* Hero */
+        #hero { background: linear-gradient(45deg, #1e293b, #3b82f6); color: white; padding: 60px 5%; text-align: center; }
+
+        /* Stats Bar */
+        .stats-bar { display: flex; justify-content: space-around; background: white; padding: 20px; width: 80%; margin: -30px auto 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; }
+        .stat-item h2 { color: var(--secondary); margin: 0; }
+        .stat-item p { margin: 0; font-size: 0.8rem; color: #64748b; }
+
+        /* Main Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+        .card { background: white; padding: 25px; border-radius: 15px; text-align: center; transition: 0.3s; border-bottom: 4px solid #ddd; }
+        .card:hover { transform: translateY(-10px); border-bottom-color: var(--secondary); }
+        .icon { font-size: 2.5rem; margin-bottom: 15px; }
+
+        /* Form elements */
+        select { width: 100%; padding: 10px; margin: 15px 0; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-blue { background: var(--secondary); }
+        .btn-red { background: var(--danger); }
+
+        /* Testimonials Section */
+        .test-section { background: #fff; padding: 50px 5%; margin-top: 50px; text-align: center; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 60px; }
+        .test-card { padding: 20px; border-left: 4px solid var(--accent); background: #f8fafc; text-align: left; font-style: italic; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 40px 5%; margin-top: 50px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .footer-bottom { text-align: center; margin-top: 30px; border-top: 1px solid #334155; padding-top: 20px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo"><u>LSCTI</u></div>
+    <div class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#" onclick="navigateTocourse()">Courses</a>
+        <a href="https://wa.me/919910602752" target="_blank" style="color: white;">Contact</a>
+        <a href="#" onclick="navigateToLogin()" class="login-btn" style="background:var(--accent); padding:8px 15px; border-radius:50px; background-color: red; ">Login</a>
+    </div> 
+</nav>
+
+<section id="hero">
+    <h1>Life set computer traning institute</h1>
+    <p>Free Computer Notes & PDFs for Every Student</p>
+</section> 
+
+<div class="stats-bar">
+    <div class="stat-item"><h2>50+</h2><p>Notes PDF</p></div>
+    <div class="stat-item"><h2>20+</h2><p>Projects</p></div>
+    <div class="stat-item"><h2>20+</h2><p>quention paper</p></div>
+    <div class="stat-item"><h2>100%</h2><p>Free Access</p></div>
+</div>
+
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <div class="icon" style="color: #2fdd8f;"><i class="fas fa-book"></i></div>
+            <h3>Study Notes <br> <h3 style="color:rgb(18, 210, 18);">Working</h3> </h3>
+            <select id="notes-select"><option>Select Topic</option>
+                <option value="notes/01_notepad.html">Notepad</option>
+                <option value="notes/02_wordpad.html">Wordpad</option>
+                <option value="notes/03_paint.html">Paint</option>
+                <option value="notes/04_excel.html">Excel</option>
+                <option value="notes/05_tally.html">Tally prime</option>
+                <option value="notes/06_python-cheetsheet.html">Python cheetsheet</option>
+                <option value="notes/07_charts.html">Types of charts</option>
+                <option value="notes/08_data analysis & statics.html">Data analysis & statics</option>
+                <option value="notes/09_c.html">C language</option>
+                <option value="notes/10_html.html">Html</option>
+                <option value="notes/11_html-shortnotes.html">Html shortnotes</option>
+                <option value="notes/12_dos.html">Dos(CMD)</option>
+                <option value="notes/13_css shortnotes.html">Css shortnotes</option>
+                <option value="notes/14_git cheetsheet.html">Git cheetsheet</option>
+                <option value="notes/15_python notebok.html">Python notbook</option>
+                <option value="notes/16_ms access.html">Ms access</option>
+
+            </select>
+               
+            <button class="btn btn-blue" onclick="visitNotes()">VISIT</button>
+        </div>
+
+        <div class="card">
+            <div class="icon" style="color: #f59e0b;"><i class="fas fa-file-invoice"></i></div>
+            <h3>Syllabus <br> <h3 style="color: red;">Upcoming</h3> </h3>
+            <select><option>Select Course</option><option>ADCA</option><option>DCA</option><option>Web Dev</option></select>
+            <button class="btn btn-blue">VISIT</button>
+        </div>
+
+        <div class="card">
+            <div class="icon" style="color: #a855f7;"><i class="fas fa-code"></i></div>
+            <h3>Projects <br> <h3 style="color: red;">Upcoming</h3> </h3>
+            <select><option>Select Tech</option><option>HTML/CSS</option><option>PHP</option><option>Java</option></select>
+            <button class="btn btn-blue">VISIT</button>
+        </div>
+
+        <div class="card">
+            <div class="icon" style="color: #10b981;"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Study Material <br> <h3 style="color: red;">Upcoming</h3> </h3>
+            <button class="btn btn-blue" onclick="navigateToStudy()">Open</button>
+        </div>
+
+        <div class="card" style="border-bottom-color: var(--danger);">
+            <div class="icon" style="color: var(--danger);"><i class="fas fa-question-circle"></i></div>
+            <h3>Question Papers <br> <h3 style="color: red;">Upcoming</h3> </h3>
+            <select><option>Select Year</option><option>2023 Papers</option><option>2022 Papers</option><option>Model Sets</option></select>
+            <button class="btn btn-red">VISIT</button>
+        </div>
+    </div>
+</div>
+<!-- update section -->
+    <section class="updates-container">
+    <h2 class="section-title">🚀 Recent Updates</h2>
+
+    <div class="updates-list">
+        
+        <div class="update-card">
+            <div class="update-date">
+                <span class="day">30</span>
+                <span class="month">Jan</span>
+            </div>
+            <div class="update-info">
+                <h3>Question paper Uploaded</h3>
+                <p>All the question are uploaded in faculties login</p>
+                <a href="login.html" class="update-btn">View Notes</a>
+            </div>
+        </div>
+
+        <div class="update-card">
+            <div class="update-date">
+                <span class="day">02</span>
+                <span class="month">Feb</span>
+            </div>
+            <div class="update-info">
+                <h3>User interface</h3>
+                <p>Changed some UI corection and theme like login button color</p>
+                <a href="login.html" class="update-btn">view</a>
+            </div>
+        </div>
+
+    </div>
+</section>   
+        
+            
+     
+
+
+<!-- footed -->
+<footer>
+    <div class="footer-content">
+        <div>
+            <h3>About Library</h3>
+            <p>Providing high-quality computer education resources to every student of our institute for free.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <ul style="list-style:none; padding:0; line-height:2;">
+                <li><a href="#" style="color:#cbd5e1">Privacy Policy</a></li>
+                <li><a href="#" style="color:#cbd5e1">Terms of Use</a></li>
+                <li><a href="#" style="color:#cbd5e1">Request New Notes</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Connect With Us</h3>
+            <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/919910602752" target="_blank" style="color: white;">+91 9910602752</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:lifesetinstitute@gmail.com" style="color: white;">lifesetinstitute@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 Tech Institute Digital Library | All Rights Reserved
+    </div>
+</footer>
+
+<script>
+function navigateToLogin() {
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        window.location.href = 'login.html';
+    }, 500);
+}
+function navigateTocourse() {
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        window.location.href = 'course.html';
+    }, 100);
+}
+
+function visitNotes() {
+    const select = document.getElementById('notes-select');
+    const selectedValue = select.value;
+    if (selectedValue) {
+        window.location.href = selectedValue;
+    } else {
+        alert('Please select a topic first');
+    }
+}
+
+function navigateToStudy() {
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        window.location.href = 'study material/01_Study.html';
+    }, 100);
+}
+</script>
+
+</body>
+</html>
