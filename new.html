@@ -92,14 +92,26 @@
     .stat-num{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);line-height:1}
     .stat-label{font-size:.78rem;color:var(--text2);margin-top:3px}
     .hero-visual{display:flex;justify-content:center;align-items:center}
-    .hero-card-stack{position:relative;width:320px;height:320px}
-    .hcard{position:absolute;border-radius:20px;padding:24px;box-shadow:var(--shadow-h);display:flex;flex-direction:column;gap:10px}
-    .hcard1{background:var(--grad);color:#fff;width:220px;top:0;left:20px;animation:float 7s ease-in-out infinite}
-    .hcard2{background:var(--surface);border:1px solid var(--border);width:200px;bottom:20px;right:0;animation:float 9s ease-in-out infinite reverse}
-    .hcard3{background:var(--grad2);color:#fff;width:160px;bottom:60px;left:0;animation:float 8s 1s ease-in-out infinite}
-    .hcard-icon{font-size:1.6rem}
-    .hcard-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
-    .hcard-sub{font-size:.75rem;opacity:.8}
+
+    /* SUBJECT ICONS */
+    .subject-icons-wrap{position:relative;width:420px;height:420px;display:flex;align-items:center;justify-content:center}
+    .center-ring{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--grad);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 8px 48px rgba(67,97,238,.50);z-index:2}
+    .center-ring i{font-size:2.2rem;color:#fff}
+    .center-ring span{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;color:#fff;text-align:center;line-height:1.2}
+    .ring-glow{position:absolute;width:230px;height:230px;border-radius:50%;border:2px dashed rgba(67,97,238,.3);animation:spin-slow 20s linear infinite;z-index:1}
+    .ring-glow2{position:absolute;width:340px;height:340px;border-radius:50%;border:1.5px dashed rgba(114,9,183,.18);animation:spin-slow 30s linear infinite reverse;z-index:1}
+    @keyframes spin-slow{to{transform:rotate(360deg)}}
+    .sicon{position:absolute;display:flex;flex-direction:column;align-items:center;gap:7px;z-index:3}
+    .sicon-box{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.20);transition:all .3s cubic-bezier(.4,0,.2,1);border:2px solid rgba(255,255,255,.20)}
+    .sicon-box:hover{transform:scale(1.20) translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.30)}
+    .sicon-label{font-size:.68rem;font-weight:700;color:var(--text2);text-align:center;letter-spacing:.03em;background:var(--surface);padding:2px 9px;border-radius:20px;border:1px solid var(--border);white-space:nowrap;box-shadow:var(--shadow)}
+    /* positions for 6 icons around circle */
+    .sicon-1{top:0px;left:50%;transform:translateX(-50%);animation:float 7s ease-in-out infinite}
+    .sicon-2{top:55px;right:15px;animation:float 8s .5s ease-in-out infinite reverse}
+    .sicon-3{bottom:55px;right:15px;animation:float 6.5s 1s ease-in-out infinite}
+    .sicon-4{bottom:0px;left:50%;transform:translateX(-50%);animation:float 9s .3s ease-in-out infinite reverse}
+    .sicon-5{bottom:55px;left:15px;animation:float 7.5s .8s ease-in-out infinite}
+    .sicon-6{top:55px;left:15px;animation:float 8.5s 1.2s ease-in-out infinite reverse}
 
     /* NOTES */
     #notes{background:var(--bg2)}
@@ -142,6 +154,7 @@
     .si-wa{background:#25d366}.si-mail{background:var(--accent)}.si-yt{background:#ff0000}
     .si-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
     .si-fb{background:#1877f2}.si-tw{background:#1da1f2}
+    .si-web{background:linear-gradient(135deg,#4361ee,#7209b7)}
     .si-name{font-weight:600;font-size:.9rem}.si-handle{font-size:.78rem;color:var(--text2)}
     .si-arrow{margin-left:auto;color:var(--text2);font-size:.75rem}
     .contact-form{display:flex;flex-direction:column;gap:16px}
@@ -192,25 +205,6 @@
       .footer-grid{grid-template-columns:1fr}
       .footer-bottom{flex-direction:column;text-align:center}
     }
-
-    /* SUBJECT ICONS */
-    .subject-icons-wrap{position:relative;width:420px;height:420px;display:flex;align-items:center;justify-content:center}
-    .center-ring{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--grad);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 8px 48px rgba(67,97,238,.50);z-index:2}
-    .center-ring i{font-size:2.2rem;color:#fff}
-    .center-ring span{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;color:#fff;text-align:center;line-height:1.2}
-    .ring-glow{position:absolute;width:230px;height:230px;border-radius:50%;border:2px dashed rgba(67,97,238,.3);animation:spin-slow 20s linear infinite;z-index:1}
-    .ring-glow2{position:absolute;width:340px;height:340px;border-radius:50%;border:1.5px dashed rgba(114,9,183,.18);animation:spin-slow 30s linear infinite reverse;z-index:1}
-    @keyframes spin-slow{to{transform:rotate(360deg)}}
-    .sicon{position:absolute;display:flex;flex-direction:column;align-items:center;gap:7px;z-index:3}
-    .sicon-box{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.20);transition:all .3s cubic-bezier(.4,0,.2,1);border:2px solid rgba(255,255,255,.20)}
-    .sicon-box:hover{transform:scale(1.20) translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.30)}
-    .sicon-label{font-size:.68rem;font-weight:700;color:var(--text2);text-align:center;letter-spacing:.03em;background:var(--surface);padding:2px 9px;border-radius:20px;border:1px solid var(--border);white-space:nowrap;box-shadow:var(--shadow)}
-    .sicon-1{top:0px;left:50%;transform:translateX(-50%);animation:float 7s ease-in-out infinite}
-    .sicon-2{top:55px;right:15px;animation:float 8s .5s ease-in-out infinite reverse}
-    .sicon-3{bottom:55px;right:15px;animation:float 6.5s 1s ease-in-out infinite}
-    .sicon-4{bottom:0px;left:50%;transform:translateX(-50%);animation:float 9s .3s ease-in-out infinite reverse}
-    .sicon-5{bottom:55px;left:15px;animation:float 7.5s .8s ease-in-out infinite}
-    .sicon-6{top:55px;left:15px;animation:float 8.5s 1.2s ease-in-out infinite reverse}
   </style>
 </head>
 <body>
@@ -230,7 +224,7 @@
     </ul>
     <div class="nav-actions">
       <button class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
-      <a class="nav-wa" href="/login.html">Login</a>
+      <a class="nav-wa" href="/login.html" target="_blank">Login</a>
       <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -243,7 +237,7 @@
   <a href="#papers" onclick="closeMob()">Papers</a>
   <a href="#updates" onclick="closeMob()">Updates</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
-  <a href="/login.html" target="_blank" style="color:#25d366;font-weight:700;background-color:var(--bg2);" >Login</a>
+  <a href="/login.html" target="_blank" style="color:#25d366;font-weight:700;background-color:var(--bg2);">Login</a>
 </div>
 
 <!-- HERO -->
@@ -268,15 +262,19 @@
           <div><div class="stat-num">100%</div><div class="stat-label">Free Access</div></div>
         </div>
       </div>
+
       <!-- SUBJECT ICONS VISUAL -->
       <div class="hero-visual fade-in">
         <div class="subject-icons-wrap">
+          <!-- Rotating rings -->
           <div class="ring-glow"></div>
           <div class="ring-glow2"></div>
+          <!-- Center -->
           <div class="center-ring">
             <i class="fas fa-graduation-cap"></i>
             <span>LSCTI<br>Notes</span>
           </div>
+          <!-- 6 subject icons -->
           <div class="sicon sicon-1">
             <div class="sicon-box" style="background:linear-gradient(135deg,#4cc9f0,#4361ee)">
               <i class="fab fa-python"></i>
@@ -303,6 +301,8 @@
           </div>
           <div class="sicon sicon-5">
             <div class="sicon-box" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+              <i class="fas fa-file-word" style="font-family:'Font Awesome 6 Free'"></i>
+              <i class="fab fa-microsoft" style="display:none"></i>
               <i class="fas fa-file-alt"></i>
             </div>
             <span class="sicon-label">MS Office</span>
@@ -315,6 +315,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -339,15 +340,13 @@
         </select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          
         </div>
       </div>
       <div class="card fade-in">
         <div class="note-icon" style="background:linear-gradient(135deg,#f72585,#b5179e)"><i class="fas fa-paint-brush"></i></div>
         <div class="note-title">Ms office</div>
-        <div class="note-desc">MS word, Excel formulas,Power point, charts, data analysis & statistics notes.</div>
+        <div class="note-desc">MS word, Excel formulas, Power point, charts, data analysis & statistics notes.</div>
         <select class="topic-select"><option value="">Select Topic</option>
-
           <option value="notes/17_word.html">Word</option>
           <option value="notes/04_excel.html">Excel</option>
           <option value="notes/18_power_point.html">Power point</option>
@@ -356,7 +355,6 @@
         </select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-         
         </div>
       </div>
       <div class="card fade-in">
@@ -367,7 +365,6 @@
             <option value="notes/05_tally.html">Tally Prime Full Notes</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-         
         </div>
       </div>
       <div class="card fade-in">
@@ -377,7 +374,6 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/06_python-cheetsheet.html">Python Cheatsheet</option><option value="notes/15_python notebok.html">Python Notebook</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-         
         </div>
       </div>
       <div class="card fade-in">
@@ -387,7 +383,6 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/10_html.html">HTML Full Notes</option><option value="notes/11_html-shortnotes.html">HTML Short Notes</option><option value="notes/13_css shortnotes.html">CSS Short Notes</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          
         </div>
       </div>
       <div class="card fade-in">
@@ -397,123 +392,11 @@
         <select class="topic-select"><option value="">Select Topic</option><option value="notes/09_c.html">C Language</option><option value="notes/12_dos.html">DOS (CMD)</option><option value="notes/14_git cheetsheet.html">Git Cheatsheet</option><option value="notes/16_ms access.html">MS Access</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-        
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- SYLLABUS -->
-<!-- <section id="syllabus">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-graduation-cap"></i> Syllabus</div>
-      <h2 class="section-title">Course <span>Syllabus</span></h2>
-      <p class="section-desc">Select your course and explore the complete syllabus with topic-wise breakdown.</p>
-    </div>
-    <div class="sp-grid">
-      <div class="card fade-in">
-        <div class="sp-badge badge-blue"><i class="fas fa-laptop"></i> ADC</div>
-        <div class="sp-title">Advance Diploma in Computer</div>
-        <div class="sp-desc">Advanced applications, office tools, programming basics, and project work over a comprehensive curriculum.</div>
-        <select class="topic-select"><option value="">Select Course</option><option value="#">ADC Full Syllabus</option></select>
-        <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fas fa-desktop"></i> DCA</div>
-        <div class="sp-title">Diploma in Computer Applications</div>
-        <div class="sp-desc">Computer basics, MS Office, internet fundamentals, and introductory programming for beginners.</div>
-        <select class="topic-select"><option value="">Select Course</option><option value="#">DCA Full Syllabus</option></select>
-        <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-purple"><i class="fab fa-html5"></i> Web Dev</div>
-        <div class="sp-title">Web Development Course</div>
-        <div class="sp-desc">HTML, CSS, JavaScript, responsive design, and a final project to build your own website.</div>
-        <select class="topic-select"><option value="">Select Course</option><option value="#">Web Dev Full Syllabus</option></select>
-        <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- PROJECTS -->
-<!-- <section id="projects" style="background:var(--bg2)">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-code"></i> Projects</div>
-      <h2 class="section-title">Student <span>Projects</span></h2>
-      <p class="section-desc">Download source code for HTML/CSS, PHP, and Java projects.</p>
-    </div>
-    <div class="sp-grid">
-      <div class="card fade-in">
-        <div class="sp-badge badge-blue"><i class="fab fa-html5"></i> HTML/CSS</div>
-        <div class="sp-title">Web Design Projects</div>
-        <div class="sp-desc">Portfolios, landing pages, and mini websites built with pure HTML & CSS. Great for beginners.</div>
-        <select class="topic-select"><option value="">Select Tech</option><option value="#">HTML/CSS</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Source Code</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</button>
-        </div>
-      </div> 
-      <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fab fa-php"></i> PHP</div>
-        <div class="sp-title">PHP Web Applications</div>
-        <div class="sp-desc">Login systems, student management, and dynamic sites powered by PHP and MySQL.</div>
-        <select class="topic-select"><option value="">Select Tech</option><option value="#">PHP</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Source Code</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</button>
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-green"><i class="fab fa-java"></i> Java</div>
-        <div class="sp-title">Java Projects</div>
-        <div class="sp-desc">Console and GUI Java projects – calculators, quiz apps, and inventory management systems.</div>
-        <select class="topic-select"><option value="">Select Tech</option><option value="#">Java</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Source Code</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-QUESTION PAPERS
-<section id="papers">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-scroll"></i> Question Papers</div>
-      <h2 class="section-title">Previous Year <span>Question Papers</span></h2>
-      <p class="section-desc">Practice with real exam papers from previous years and model question sets.</p>
-    </div>
-    <div class="sp-grid">
-      <div class="card fade-in">
-        <div class="sp-badge badge-blue"><i class="fas fa-calendar-alt"></i> 2023</div>
-        <div class="sp-title">2023 Question Papers</div>
-        <div class="sp-desc">All 2023 exam papers organized by subject. Best for last-minute revision and understanding exam patterns.</div>
-        <select class="topic-select"><option value="">Select Year</option><option value="#">2023 Papers</option></select>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download All</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fas fa-calendar-alt"></i> 2022</div>
-        <div class="sp-title">2022 Question Papers</div>
-        <div class="sp-desc">Complete set of 2022 question papers. Identify trends and frequently asked questions per topic.</div>
-        <select class="topic-select"><option value="">Select Year</option><option value="#">2022 Papers</option></select>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download All</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-purple"><i class="fas fa-file-alt"></i> Model Sets</div>
-        <div class="sp-title">Model Question Sets</div>
-        <div class="sp-desc">Expertly crafted model sets based on the latest syllabus. Practice full exams under timed conditions.</div>
-        <select class="topic-select"><option value="">Select Set</option><option value="#">Model Sets</option></select>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download All</button>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <!-- UPDATES -->
 <section id="updates">
@@ -527,7 +410,7 @@ QUESTION PAPERS
       <div class="update-item fade-in">
         <div class="update-date"><div class="update-day">06</div><div class="update-mon">mar</div></div>
         <div>
-          <div class="update-title">New notes Uploaded Ms excel,word,powerppoint</div>
+          <div class="update-title">New notes Uploaded Ms excel, word, powerpoint</div>
           <div class="update-desc">All question papers are now uploaded and available. Organized by topic for easy access.</div>
           <a href="#notes" class="btn btn-outline btn-sm">View Notes</a>
         </div>
@@ -536,7 +419,7 @@ QUESTION PAPERS
         <div class="update-date"><div class="update-day">07</div><div class="update-mon">mar</div></div>
         <div>
           <div class="update-title">Complete LMS UPDATE 😊</div>
-          <div class="update-desc">Updated interface with improved theme, better navigation, and a cleaner design for easier access. <h4>New theme button on navbar <button class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i></button></h4></div>
+          <div class="update-desc">Updated interface with improved theme, better navigation, and a cleaner design for easier access. <h4>New theme button on navbar <button class="theme-btn" id="themeToggle2"><i class="fas fa-moon"></i></button></h4></div>
           <a href="#hero" class="btn btn-outline btn-sm">Explore</a>
         </div>
       </div>
@@ -544,7 +427,7 @@ QUESTION PAPERS
         <div class="update-date"><div class="update-day">01</div><div class="update-mon">april</div></div>
         <div>
           <div class="update-title">Upcomming</div>
-          <div class="update-desc">MS word,excel,power point practical task and tally prime entries ,more plactical work</div>
+          <div class="update-desc">MS word, excel, power point practical task and tally prime entries, more practical work</div>
           <a href="#notes" class="btn btn-outline btn-sm">upcoming</a>
         </div>
       </div>
@@ -591,7 +474,7 @@ QUESTION PAPERS
             <i class="fas fa-chevron-right si-arrow"></i>
           </a>
           <a href="https://lscti.com/" target="_blank" class="social-item">
-            <div class="si-icon si-fb"><i class="fas fa-globe"></i></div>
+            <div class="si-icon si-web"><i class="fas fa-globe"></i></div>
             <div><div class="si-name">Website</div><div class="si-handle">lscti.com</div></div>
             <i class="fas fa-chevron-right si-arrow"></i>
           </a>
@@ -601,7 +484,7 @@ QUESTION PAPERS
         </a>
       </div>
 
-    <!-- contact form -->
+      <!-- contact form -->
       <div class="fade-in">
         <form class="contact-form" onsubmit="sendMsg(event)">
           <div class="form-row">
@@ -656,9 +539,7 @@ QUESTION PAPERS
           <a class="fsoc si-ig" href="https://www.instagram.com/life_set_computer_institute?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
           <a class="fsoc si-fb" href="https://www.facebook.com/people/Life-Set-Computer-Training-Institute/100063915368878/" target="_blank"><i class="fab fa-facebook-f"></i></a>
           <a class="fsoc si-mail" href="mailto:lifesetinstitute@gmail.com"><i class="fas fa-envelope"></i></a>
-          <a class="fsoc si-mail" href="https://lscti.com/"><i class="fas fa-globe"></i></a>
-          
-
+          <a class="fsoc" style="background:linear-gradient(135deg,#4361ee,#7209b7)" href="https://lscti.com/" target="_blank"><i class="fas fa-globe"></i></a>
         </div>
       </div>
       <div>
@@ -712,7 +593,9 @@ QUESTION PAPERS
     localStorage.setItem('lscti-theme', next);
     updateIcon(next);
   });
-  function updateIcon(t) { themeBtn.querySelector('i').className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; }
+  function updateIcon(t) {
+    document.querySelectorAll('.theme-btn i').forEach(i => i.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon');
+  }
 
   // HAMBURGER
   const ham = document.getElementById('hamburger');
@@ -753,11 +636,8 @@ QUESTION PAPERS
     if (!sel) return;
     const url = sel.value;
     if (!url) { alert('Please select a topic first!'); return; }
-    // open selected resource in new tab/window
     window.open(url, '_blank');
   }
-
- 
 
   // CONTACT FORM
   function sendMsg(e) {
@@ -766,26 +646,21 @@ QUESTION PAPERS
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-    // Form se data uthao
     const name    = e.target.querySelector('input[type="text"]').value;
     const phone   = e.target.querySelector('input[type="tel"]').value;
     const email   = e.target.querySelector('input[type="email"]').value;
     const subject = e.target.querySelector('select').value;
     const message = e.target.querySelector('textarea').value;
 
-    // WhatsApp message banana
     const text = `*New Contact Form Message* 🔔
-    *Name:* ${name}
-    *Phone:* ${phone || 'Not provided'}
-    *Email:* ${email}
-    *Subject:* ${subject || 'Not selected'}
-    *Message:* ${message}`;
+*Name:* ${name}
+*Phone:* ${phone || 'Not provided'}
+*Email:* ${email}
+*Subject:* ${subject || 'Not selected'}
+*Message:* ${message}`;
 
     setTimeout(() => {
-      // WhatsApp pe bhejo
       window.open(`https://wa.me/919289882752?text=${encodeURIComponent(text)}`, '_blank');
-
-      // Success message dikhao
       const success = document.getElementById('formSuccess');
       success.style.display = 'block';
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
@@ -794,7 +669,6 @@ QUESTION PAPERS
       setTimeout(() => { success.style.display = 'none'; }, 5000);
     }, 1200);
   }
-
 </script>
 </body>
 </html>
