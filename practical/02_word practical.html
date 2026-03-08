@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LSCTI | MS Word Practical</title>
+  <link rel="shortcut icon" href="../images/favicon2.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:#1e293b; --secondary:#3b82f6; --accent:#6dc854;
+      --danger:#ef4444; --bg:#f1f5f9; --white:#ffffff;
+      --text:#334155; --muted:#64748b; --border:#e2e8f0;
+      --word:#2b579a;
+    }
+    html,body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+    .page{max-width:1100px;margin:0 auto;padding:28px 20px 60px;}
+
+    /* HERO */
+    .hero{background:linear-gradient(135deg,var(--primary) 0%,#1a3a5c 100%);border-radius:16px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px;position:relative;overflow:hidden;animation:fadeUp .4s ease both;}
+    .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(43,87,154,.15);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-30px;left:20%;width:120px;height:120px;background:rgba(109,200,84,.08);border-radius:50%;}
+    .hero-left{display:flex;align-items:center;gap:14px;position:relative;z-index:1;}
+    .hero-icon{width:52px;height:52px;background:linear-gradient(135deg,var(--word),#1e3f7a);border-radius:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(43,87,154,.4);flex-shrink:0;font-size:22px;}
+    .hero-title h1{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px;}
+    .hero-title p{font-size:13px;color:#94a3b8;margin-top:3px;}
+    .hero-stats{display:flex;gap:20px;position:relative;z-index:1;}
+    .stat .stat-num{font-size:22px;font-weight:700;color:#fff;line-height:1;}
+    .stat .stat-lbl{font-size:11px;color:#64748b;margin-top:2px;}
+
+    /* PROGRESS */
+    .progress-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;margin-bottom:18px;display:flex;align-items:center;gap:16px;animation:fadeUp .4s .03s ease both;}
+    .progress-info{flex:1;}
+    .progress-info p{font-size:12px;color:var(--muted);margin-bottom:6px;}
+    .progress-bar-bg{height:6px;background:#f1f5f9;border-radius:99px;overflow:hidden;}
+    .progress-bar{height:100%;background:linear-gradient(90deg,var(--word),var(--accent));border-radius:99px;transition:width .5s ease;}
+    .progress-pct{font-size:20px;font-weight:700;color:var(--primary);white-space:nowrap;}
+
+    /* FILTERS */
+    .filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;animation:fadeUp .4s .05s ease both;}
+    .filter-lbl{font-size:12px;font-weight:600;color:var(--muted);margin-right:4px;}
+    .filter-btn{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--muted);transition:all .18s;font-family:'Inter',sans-serif;}
+    .filter-btn:hover{border-color:var(--word);color:var(--word);}
+    .filter-btn.active{background:var(--word);border-color:var(--word);color:#fff;}
+
+    /* GRID */
+    .tasks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+
+    /* CARD */
+    .task-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .22s;animation:fadeUp .4s ease both;box-shadow:0 1px 6px rgba(0,0,0,.04);}
+    .task-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09);border-color:#cbd5e1;}
+
+    .card-top{padding:15px 17px 12px;display:flex;align-items:flex-start;gap:11px;}
+    .q-num{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+    .card-hd{flex:1;}
+    .card-title{font-size:14px;font-weight:600;color:var(--primary);line-height:1.4;}
+    .card-meta{display:flex;align-items:center;gap:5px;margin-top:5px;flex-wrap:wrap;}
+    .badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:50px;letter-spacing:.2px;}
+
+    /* category colors */
+    .cat-format  .q-num,.cat-format  .badge-cat{background:#dbeafe;color:#1d4ed8;}
+    .cat-table   .q-num,.cat-table   .badge-cat{background:#dcfce7;color:#15803d;}
+    .cat-layout  .q-num,.cat-layout  .badge-cat{background:#fef3c7;color:#b45309;}
+    .cat-tools   .q-num,.cat-tools   .badge-cat{background:#ede9fe;color:#6d28d9;}
+    .cat-mail    .q-num,.cat-mail    .badge-cat{background:#fce7f3;color:#be185d;}
+    .cat-advanced.q-num,.cat-advanced.badge-cat{background:#ffedd5;color:#c2410c;}
+    .badge-easy {background:#dcfce7;color:#15803d;}
+    .badge-med  {background:#fef3c7;color:#b45309;}
+    .badge-hard {background:#fee2e2;color:#b91c1c;}
+
+    .card-body{padding:0 17px 12px;}
+    .task-desc{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+    .data-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:10px 0 5px;}
+
+    /* mini table */
+    .mini-table{width:100%;border-collapse:collapse;font-size:11px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:8px;}
+    .mini-table th{background:#f8fafc;padding:5px 8px;text-align:left;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);}
+    .mini-table td{padding:4px 8px;color:var(--text);border-bottom:1px solid #f1f5f9;}
+    .mini-table tr:last-child td{border-bottom:none;}
+    .mini-table tr:nth-child(even) td{background:#fafbfc;}
+    .mini-table .th-wd{background:#2b579a;color:#fff;font-weight:600;}
+
+    /* steps */
+    .steps-list{list-style:none;margin-top:6px;}
+    .steps-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text);padding:3px 0;line-height:1.5;}
+    .step-n{width:18px;height:18px;border-radius:50%;background:var(--word);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+    /* boxes */
+    .info-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 12px;font-size:12px;color:#1e40af;margin-bottom:8px;}
+    .warn-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;font-size:12px;color:#92400e;margin-bottom:8px;}
+    .sample-box{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text);margin-bottom:8px;line-height:1.8;}
+    .sample-box strong{color:var(--primary);}
+
+    /* card footer */
+    .card-footer{padding:10px 17px 13px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f1f5f9;}
+    .done-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;}
+    .done-check input{display:none;}
+    .checkmark{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+    .done-check input:checked~.checkmark{background:var(--accent);border-color:var(--accent);}
+    .done-check input:checked~.checkmark::after{content:'✓';font-size:11px;color:#fff;font-weight:700;}
+    .done-check input:checked~span{color:var(--accent);font-weight:600;text-decoration:line-through;}
+    .card-qn{font-size:11px;color:#94a3b8;font-weight:500;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .task-card:nth-child(1){animation-delay:.04s}.task-card:nth-child(2){animation-delay:.07s}.task-card:nth-child(3){animation-delay:.10s}.task-card:nth-child(4){animation-delay:.13s}.task-card:nth-child(5){animation-delay:.16s}.task-card:nth-child(6){animation-delay:.19s}.task-card:nth-child(7){animation-delay:.22s}.task-card:nth-child(8){animation-delay:.25s}.task-card:nth-child(9){animation-delay:.28s}.task-card:nth-child(10){animation-delay:.31s}.task-card:nth-child(11){animation-delay:.34s}.task-card:nth-child(12){animation-delay:.37s}.task-card:nth-child(13){animation-delay:.40s}.task-card:nth-child(14){animation-delay:.43s}.task-card:nth-child(15){animation-delay:.46s}
+
+    @media(max-width:640px){.hero{padding:18px;}.tasks-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-icon">📝</div>
+      <div class="hero-title">
+        <h1>MS Word — Practical Tasks</h1>
+        <p>Life Set Computer Training Institute · Word Processing Workbook</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">15</div><div class="stat-lbl">Total Tasks</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Topics</div></div>
+      <div class="stat"><div class="stat-num">Free</div><div class="stat-lbl">Access</div></div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <p>Your Progress — <strong id="doneCount">0</strong> of 15 tasks completed</p>
+      <div class="progress-bar-bg"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    </div>
+    <div class="progress-pct" id="progressPct">0%</div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <span class="filter-lbl">Filter:</span>
+    <button class="filter-btn active" onclick="filterCards('all',this)">All (15)</button>
+    <button class="filter-btn" onclick="filterCards('format',this)">✏️ Formatting</button>
+    <button class="filter-btn" onclick="filterCards('table',this)">🗂️ Tables</button>
+    <button class="filter-btn" onclick="filterCards('layout',this)">📐 Page Layout</button>
+    <button class="filter-btn" onclick="filterCards('tools',this)">🔧 Tools</button>
+    <button class="filter-btn" onclick="filterCards('mail',this)">📧 Mail Merge</button>
+    <button class="filter-btn" onclick="filterCards('advanced',this)">⭐ Advanced</button>
+  </div>
+
+  <!-- CARDS -->
+  <div class="tasks-grid" id="tasksGrid">
+
+    <!-- Q1 -->
+    <div class="task-card cat-format" data-cat="format">
+      <div class="card-top">
+        <div class="q-num">1</div>
+        <div class="card-hd">
+          <div class="card-title">Basic Text Formatting</div>
+          <div class="card-meta"><span class="badge badge-cat">Formatting</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Type the paragraph below and apply all formatting exactly as shown.</p>
+        <div class="data-label">📋 Type this text in Word:</div>
+        <div class="sample-box">
+          <strong style="font-size:14px;">Life Set Computer Training Institute</strong><br>
+          <em>Providing quality computer education since 2010.</em><br>
+          <u>Our Courses: MS Office, Tally, Python, C Language</u><br>
+          <span style="color:#ef4444;">Contact: +91 9289882752</span>
+        </div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Line 1 → <strong>Bold</strong>, Font size 16, Centre align</li>
+          <li><div class="step-n">2</div>Line 2 → <strong>Italic</strong>, Font size 12</li>
+          <li><div class="step-n">3</div>Line 3 → <strong>Underline</strong>, Font size 12</li>
+          <li><div class="step-n">4</div>Line 4 → Font color Red, Font size 11</li>
+          <li><div class="step-n">5</div>Overall font: <strong>Times New Roman</strong></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.1 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="task-card cat-format" data-cat="format">
+      <div class="card-top">
+        <div class="q-num">2</div>
+        <div class="card-hd">
+          <div class="card-title">Font Styles & Paragraph Spacing</div>
+          <div class="card-meta"><span class="badge badge-cat">Formatting</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Type any 2-paragraph text. Apply font settings and paragraph spacing as given below.</p>
+        <div class="data-label">📋 Apply these settings:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Setting</th><th class="th-wd">Value</th></tr>
+          <tr><td>Font</td><td>Calibri</td></tr>
+          <tr><td>Font Size</td><td>12pt (Heading: 16pt)</td></tr>
+          <tr><td>Line Spacing</td><td>1.5 lines</td></tr>
+          <tr><td>Before Paragraph</td><td>6pt</td></tr>
+          <tr><td>After Paragraph</td><td>12pt</td></tr>
+          <tr><td>Indent (Left)</td><td>1 cm</td></tr>
+          <tr><td>Alignment</td><td>Justified</td></tr>
+        </table>
+        <div class="info-box">💡 Home tab → Paragraph group → Line Spacing Options to set all at once</div>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.2 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="task-card cat-format" data-cat="format">
+      <div class="card-top">
+        <div class="q-num">3</div>
+        <div class="card-hd">
+          <div class="card-title">Bulleted & Numbered Lists</div>
+          <div class="card-meta"><span class="badge badge-cat">Formatting</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create both a <strong>Bulleted list</strong> and a <strong>Numbered list</strong> using the data below.</p>
+        <div class="data-label">📋 Bulleted List — Fruits:</div>
+        <div class="sample-box">
+          • Mango<br>• Apple<br>• Banana<br>• Orange<br>• Grapes
+        </div>
+        <div class="data-label">📋 Numbered List — Steps to open MS Word:</div>
+        <div class="sample-box">
+          1. Click on Start Menu<br>
+          2. Search for Microsoft Word<br>
+          3. Click to open the application<br>
+          4. Click on Blank Document<br>
+          5. Start typing your document
+        </div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Home tab → Paragraph group → Bullets / Numbering button</li>
+          <li><div class="step-n">2</div>Try changing bullet style: arrow, checkmark, square</li>
+          <li><div class="step-n">3</div>Try Multi-level list for the numbered list</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.3 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="task-card cat-table" data-cat="table">
+      <div class="card-top">
+        <div class="q-num">4</div>
+        <div class="card-hd">
+          <div class="card-title">Create & Format a Table</div>
+          <div class="card-meta"><span class="badge badge-cat">Tables</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Insert a table, enter student data, and apply formatting as shown.</p>
+        <div class="data-label">📋 Enter this data in the table:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Roll No.</th><th class="th-wd">Student Name</th><th class="th-wd">Class</th><th class="th-wd">Marks</th><th class="th-wd">Grade</th></tr>
+          <tr><td>01</td><td>Rahul Sharma</td><td>10th</td><td>85</td><td>A</td></tr>
+          <tr><td>02</td><td>Priya Singh</td><td>10th</td><td>92</td><td>A+</td></tr>
+          <tr><td>03</td><td>Amit Kumar</td><td>10th</td><td>74</td><td>B</td></tr>
+          <tr><td>04</td><td>Sneha Gupta</td><td>10th</td><td>68</td><td>B</td></tr>
+          <tr><td>05</td><td>Rohit Verma</td><td>10th</td><td>55</td><td>C</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Insert → Table → 5 columns × 6 rows</li>
+          <li><div class="step-n">2</div>Header row → Bold, Blue background, White text</li>
+          <li><div class="step-n">3</div>Apply table style: Table Design tab → pick any style</li>
+          <li><div class="step-n">4</div>Centre-align all content in cells</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.4 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="task-card cat-table" data-cat="table">
+      <div class="card-top">
+        <div class="q-num">5</div>
+        <div class="card-hd">
+          <div class="card-title">Merge & Split Cells — Timetable</div>
+          <div class="card-meta"><span class="badge badge-cat">Tables</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a <strong>weekly class timetable</strong> using merge and split cells to make it look like a real schedule.</p>
+        <div class="data-label">📋 Timetable structure:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Time</th><th class="th-wd">Monday</th><th class="th-wd">Tuesday</th><th class="th-wd">Wednesday</th><th class="th-wd">Thursday</th><th class="th-wd">Friday</th></tr>
+          <tr><td>9–10 AM</td><td>MS Word</td><td>MS Excel</td><td>MS Word</td><td>Tally</td><td>Python</td></tr>
+          <tr><td>10–11 AM</td><td>MS Excel</td><td>Tally</td><td>MS Excel</td><td>Python</td><td>MS Word</td></tr>
+          <tr><td>11–12 PM</td><td colspan="5" style="text-align:center;font-style:italic;">— BREAK —</td></tr>
+          <tr><td>12–1 PM</td><td>Python</td><td>MS Word</td><td>Tally</td><td>MS Excel</td><td>Tally</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Create table → select Break row cells → Layout → Merge Cells</li>
+          <li><div class="step-n">2</div>Type "— BREAK —" and centre it</li>
+          <li><div class="step-n">3</div>Apply different shading to Break row</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.5 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="task-card cat-layout" data-cat="layout">
+      <div class="card-top">
+        <div class="q-num">6</div>
+        <div class="card-hd">
+          <div class="card-title">Page Setup — Margins, Orientation & Size</div>
+          <div class="card-meta"><span class="badge badge-cat">Page Layout</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Open a new document. Apply these exact page setup settings.</p>
+        <div class="data-label">📋 Apply these page settings:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Setting</th><th class="th-wd">Value</th></tr>
+          <tr><td>Page Size</td><td>A4</td></tr>
+          <tr><td>Orientation</td><td>Portrait</td></tr>
+          <tr><td>Top Margin</td><td>1 inch (2.54 cm)</td></tr>
+          <tr><td>Bottom Margin</td><td>1 inch</td></tr>
+          <tr><td>Left Margin</td><td>1.25 inch</td></tr>
+          <tr><td>Right Margin</td><td>1.25 inch</td></tr>
+          <tr><td>Gutter</td><td>0.5 inch (Left)</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Layout tab → Margins → Custom Margins</li>
+          <li><div class="step-n">2</div>Set all values as above → Apply to: Whole Document → OK</li>
+          <li><div class="step-n">3</div>Type a full page of text to see the margins in action</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.6 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="task-card cat-layout" data-cat="layout">
+      <div class="card-top">
+        <div class="q-num">7</div>
+        <div class="card-hd">
+          <div class="card-title">Header, Footer & Page Numbers</div>
+          <div class="card-meta"><span class="badge badge-cat">Page Layout</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a 2-page document. Add a header, footer, and page numbers as shown.</p>
+        <div class="data-label">📋 Header content:</div>
+        <div class="sample-box">
+          <strong>Left:</strong> Life Set Computer Training Institute<br>
+          <strong>Centre:</strong> (empty)<br>
+          <strong>Right:</strong> Date (insert automatic date)
+        </div>
+        <div class="data-label">📋 Footer content:</div>
+        <div class="sample-box">
+          <strong>Left:</strong> Confidential<br>
+          <strong>Centre:</strong> Page [X] of [Y]<br>
+          <strong>Right:</strong> www.lscti.com
+        </div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Insert → Header → Edit Header → type Left text, Tab to Centre, Tab to Right</li>
+          <li><div class="step-n">2</div>Insert → Footer → same structure</li>
+          <li><div class="step-n">3</div>Insert → Page Number → Bottom of Page → centre</li>
+          <li><div class="step-n">4</div>Use &amp;[Page] of &amp;[Pages] for "Page X of Y"</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.7 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="task-card cat-layout" data-cat="layout">
+      <div class="card-top">
+        <div class="q-num">8</div>
+        <div class="card-hd">
+          <div class="card-title">Columns & Drop Cap</div>
+          <div class="card-meta"><span class="badge badge-cat">Page Layout</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Type a paragraph of text. Format it into <strong>2 columns</strong> and add a <strong>Drop Cap</strong> on the first letter.</p>
+        <div class="data-label">📋 Type this sample text (or your own):</div>
+        <div class="sample-box">
+          <strong>C</strong>omputers have changed the world in many ways. From education to business, every field now depends on computers. Learning computer skills is very important for students today. MS Word helps us create professional documents easily.
+        </div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Select all text → Layout → Columns → Two</li>
+          <li><div class="step-n">2</div>Click at start of paragraph → Insert → Drop Cap → Dropped</li>
+          <li><div class="step-n">3</div>Set Drop Cap: Lines to drop = 3, Font = Times New Roman</li>
+          <li><div class="step-n">4</div>Layout → Columns → More Columns → add line between columns</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.8 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="task-card cat-tools" data-cat="tools">
+      <div class="card-top">
+        <div class="q-num">9</div>
+        <div class="card-hd">
+          <div class="card-title">Find & Replace + Spell Check</div>
+          <div class="card-meta"><span class="badge badge-cat">Tools</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Type the paragraph below (with intentional spelling mistakes). Use Find & Replace and Spell Check to fix everything.</p>
+        <div class="data-label">📋 Type this text exactly (mistakes included):</div>
+        <div class="sample-box">
+          The studant went to skool every day. He lerned computar and mathemtics. His techer was very kind. The studant loved lerning new things every day at skool.
+        </div>
+        <div class="warn-box">⚠️ Type the text exactly as above — mistakes are intentional for practice!</div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Ctrl+H → Find: "studant" → Replace with: "student" → Replace All</li>
+          <li><div class="step-n">2</div>Similarly replace "skool" → "school", "lerned" → "learned"</li>
+          <li><div class="step-n">3</div>Review tab → Spelling & Grammar → fix remaining errors</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.9 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="task-card cat-tools" data-cat="tools">
+      <div class="card-top">
+        <div class="q-num">10</div>
+        <div class="card-hd">
+          <div class="card-title">Styles & Table of Contents</div>
+          <div class="card-meta"><span class="badge badge-cat">Tools</span><span class="badge badge-hard">Hard</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a multi-section document. Apply <strong>Heading Styles</strong> and auto-generate a <strong>Table of Contents</strong>.</p>
+        <div class="data-label">📋 Create document with these headings:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Text</th><th class="th-wd">Style to Apply</th></tr>
+          <tr><td>Computer Basics</td><td>Heading 1</td></tr>
+          <tr><td>What is a Computer?</td><td>Heading 2</td></tr>
+          <tr><td>Parts of Computer</td><td>Heading 2</td></tr>
+          <tr><td>MS Office</td><td>Heading 1</td></tr>
+          <tr><td>MS Word</td><td>Heading 2</td></tr>
+          <tr><td>MS Excel</td><td>Heading 2</td></tr>
+          <tr><td>MS PowerPoint</td><td>Heading 2</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Click each heading → Home → Styles → apply Heading 1 or 2</li>
+          <li><div class="step-n">2</div>Add 2–3 lines of body text under each heading</li>
+          <li><div class="step-n">3</div>Go to page 1 → References → Table of Contents → Automatic Table 1</li>
+          <li><div class="step-n">4</div>TOC updates automatically with page numbers!</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.10 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="task-card cat-tools" data-cat="tools">
+      <div class="card-top">
+        <div class="q-num">11</div>
+        <div class="card-hd">
+          <div class="card-title">Track Changes & Comments</div>
+          <div class="card-meta"><span class="badge badge-cat">Tools</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Type a short paragraph. Enable Track Changes, make edits, add comments, then accept/reject changes.</p>
+        <div class="data-label">📋 Original text — type this first:</div>
+        <div class="sample-box">
+          MS Word is a word processing software made by Microsoft. It is used to create letters, reports, and resumes. It has many useful features like spell check, formatting, and tables.
+        </div>
+        <div class="data-label">📋 After enabling Track Changes, make these edits:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Action</th><th class="th-wd">What to do</th></tr>
+          <tr><td>Delete</td><td>Remove "made by Microsoft"</td></tr>
+          <tr><td>Replace</td><td>Change "letters" to "official letters"</td></tr>
+          <tr><td>Add Comment</td><td>Select "spell check" → add comment: "Good feature!"</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Review → Track Changes → Turn ON</li>
+          <li><div class="step-n">2</div>Make the edits above — changes show in red</li>
+          <li><div class="step-n">3</div>Review → Accept / Reject each change one by one</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.11 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="task-card cat-advanced" data-cat="advanced">
+      <div class="card-top">
+        <div class="q-num">12</div>
+        <div class="card-hd">
+          <div class="card-title">Create a Resume / Bio-Data</div>
+          <div class="card-meta"><span class="badge badge-cat">Advanced</span><span class="badge badge-hard">Hard</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a professional <strong>1-page Resume</strong> using the sample data below. Use tables, formatting, and styles.</p>
+        <div class="data-label">📋 Use this sample data:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Section</th><th class="th-wd">Content</th></tr>
+          <tr><td>Name</td><td>Rahul Kumar</td></tr>
+          <tr><td>Phone</td><td>+91 9876543210</td></tr>
+          <tr><td>Email</td><td>rahul@email.com</td></tr>
+          <tr><td>Objective</td><td>Seeking a position to use my computer skills in a good organization</td></tr>
+          <tr><td>Education</td><td>B.Com — Delhi University (2023) | 12th — CBSE (2020) — 75%</td></tr>
+          <tr><td>Skills</td><td>MS Office, Tally Prime, Internet, Typing (40 WPM)</td></tr>
+          <tr><td>Languages</td><td>Hindi (Fluent), English (Good)</td></tr>
+          <tr><td>Hobbies</td><td>Reading, Cricket, Drawing</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Name → Centre, Bold, 18pt, Blue color</li>
+          <li><div class="step-n">2</div>Section headings → Bold, 12pt, bottom border line</li>
+          <li><div class="step-n">3</div>Use a 2-column table for contact details</li>
+          <li><div class="step-n">4</div>Keep overall font Calibri 11pt, margins 0.75 inch</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.12 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="task-card cat-mail" data-cat="mail">
+      <div class="card-top">
+        <div class="q-num">13</div>
+        <div class="card-hd">
+          <div class="card-title">Mail Merge — Invitation Letters</div>
+          <div class="card-meta"><span class="badge badge-cat">Mail Merge</span><span class="badge badge-hard">Hard</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a <strong>main letter</strong> with merge fields and a <strong>data source</strong> (Excel/Word table). Merge to generate 5 personalized letters.</p>
+        <div class="data-label">📋 Data Source — create this in Excel first:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">FirstName</th><th class="th-wd">LastName</th><th class="th-wd">City</th><th class="th-wd">Course</th></tr>
+          <tr><td>Rahul</td><td>Sharma</td><td>Delhi</td><td>MS Office</td></tr>
+          <tr><td>Priya</td><td>Singh</td><td>Noida</td><td>Tally Prime</td></tr>
+          <tr><td>Amit</td><td>Kumar</td><td>Gurgaon</td><td>Python</td></tr>
+          <tr><td>Sneha</td><td>Gupta</td><td>Delhi</td><td>MS Office</td></tr>
+          <tr><td>Rohit</td><td>Verma</td><td>Faridabad</td><td>C Language</td></tr>
+        </table>
+        <div class="data-label">📋 Main Letter Template:</div>
+        <div class="sample-box">
+          Dear <strong>«FirstName» «LastName»</strong>,<br><br>
+          We are pleased to inform you that your admission to <strong>«Course»</strong> course at LSCTI has been confirmed. Please report to our institute in <strong>«City»</strong>.<br><br>
+          Regards,<br>LSCTI Administration
+        </div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Mailings → Start Mail Merge → Letters</li>
+          <li><div class="step-n">2</div>Select Recipients → Use Existing List → select your Excel file</li>
+          <li><div class="step-n">3</div>Insert Merge Field → add «FirstName», «Course» etc.</li>
+          <li><div class="step-n">4</div>Preview Results → Finish & Merge → Print Documents</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.13 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="task-card cat-advanced" data-cat="advanced">
+      <div class="card-top">
+        <div class="q-num">14</div>
+        <div class="card-hd">
+          <div class="card-title">WordArt, Shapes & SmartArt</div>
+          <div class="card-meta"><span class="badge badge-cat">Advanced</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a decorative page using <strong>WordArt</strong>, <strong>Shapes</strong>, and <strong>SmartArt</strong> to represent an organization chart.</p>
+        <div class="data-label">📋 What to create:</div>
+        <table class="mini-table">
+          <tr><th class="th-wd">Element</th><th class="th-wd">What to do</th></tr>
+          <tr><td>WordArt</td><td>Insert "LSCTI" as WordArt — style: Fill Blue, Outline White</td></tr>
+          <tr><td>Rectangle Shape</td><td>Draw a banner shape, add text: "Best Computer Institute"</td></tr>
+          <tr><td>SmartArt</td><td>Insert → SmartArt → Hierarchy → Organization Chart</td></tr>
+          <tr><td>Org Chart</td><td>Director → Manager → (Teacher 1, Teacher 2, Teacher 3)</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Insert → WordArt → type text → format from Shape Format tab</li>
+          <li><div class="step-n">2</div>Insert → Shapes → Rectangle → type inside</li>
+          <li><div class="step-n">3</div>Insert → SmartArt → Hierarchy → fill org chart boxes</li>
+          <li><div class="step-n">4</div>Change SmartArt colors: SmartArt Design → Change Colors</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.14 / 15</span>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="task-card cat-advanced" data-cat="advanced">
+      <div class="card-top">
+        <div class="q-num">15</div>
+        <div class="card-hd">
+          <div class="card-title">Create a Formal Letter / Application</div>
+          <div class="card-meta"><span class="badge badge-cat">Advanced</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Type this complete <strong>formal leave application</strong> in Word with correct formatting and alignment.</p>
+        <div class="data-label">📋 Type this letter exactly:</div>
+        <div class="sample-box">
+          <strong style="display:block;text-align:right;">Date: 08/03/2026</strong><br>
+          <strong>To,</strong><br>
+          The Principal,<br>
+          Life Set Computer Training Institute,<br>
+          Delhi – 110001<br><br>
+          <strong>Subject: Application for Leave</strong><br><br>
+          Respected Sir/Madam,<br><br>
+          I am writing to request a leave of <u>3 days</u> from <u>10th March</u> to <u>12th March 2026</u> due to a family function at my home.<br><br>
+          I hope you will grant me the leave. I shall be grateful to you.<br><br>
+          Thanking You,<br><br>
+          Yours Sincerely,<br>
+          <strong>Rahul Kumar</strong><br>
+          Roll No: 15 | Class: Batch A
+        </div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Date → Right aligned</li>
+          <li><div class="step-n">2</div>Subject line → Bold, Underline</li>
+          <li><div class="step-n">3</div>Body text → Justified alignment, 1.5 line spacing</li>
+          <li><div class="step-n">4</div>Font: Times New Roman, 12pt throughout</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.15 / 15</span>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+</div><!-- /page -->
+
+<script>
+  const TOTAL = 15;
+  function updateProgress() {
+    const done = document.querySelectorAll('.done-check input:checked').length;
+    const pct = Math.round((done / TOTAL) * 100);
+    document.getElementById('doneCount').textContent = done;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.task-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

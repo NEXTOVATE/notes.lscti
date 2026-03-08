@@ -5,88 +5,391 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LSCTI | Login</title>
   <link rel="shortcut icon" href="images/favicon2.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
       --primary: #1e293b;
       --secondary: #3b82f6;
       --accent: #6dc854;
       --danger: #ef4444;
       --bg: #f1f5f9;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --white: #ffffff;
     }
+
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(45deg, #1e293b, #3b82f6);
-      height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+    .nav-logo-text span { color: var(--secondary); }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .nav-back:hover { color: var(--primary); border-color: #cbd5e1; background: #f8fafc; }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      padding: 40px 20px;
     }
-    .login-box {
-      background: #fff;
-      color: #334155;
-      padding: 30px;
-      width: 320px;
-      border-radius: 15px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 420px;
+      animation: fadeUp 0.45s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── CARD ── */
+    .login-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2d4163 100%);
+      padding: 28px 32px 24px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .login-box h2 {
-      margin-bottom: 20px;
-      color: var(--primary);
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 120px; height: 120px;
+      background: rgba(59,130,246,0.15);
+      border-radius: 50%;
     }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
-      font-size: 14px;
+    .card-header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; left: -20px;
+      width: 80px; height: 80px;
+      background: rgba(109,200,84,0.1);
+      border-radius: 50%;
     }
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: var(--secondary);
+    .header-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--secondary), #1d4ed8);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 8px 20px rgba(59,130,246,0.35);
+      position: relative; z-index: 1;
+    }
+    .header-icon svg { width: 24px; height: 24px; stroke: #fff; fill: none; }
+    .card-header h1 {
+      font-size: 20px;
+      font-weight: 700;
       color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 15px;
+      letter-spacing: -0.3px;
+      position: relative; z-index: 1;
     }
-    button:hover { background: #1d4ed8; }
-    .note { font-size: 12px; margin-top: 15px; color: #64748b; }
-    .error { color: var(--danger); font-size: 13px; margin-top: 10px; }
+    .card-header p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 4px;
+      position: relative; z-index: 1;
+    }
+
+    .card-body { padding: 28px 32px 32px; }
+
+    .auth-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 22px;
+    }
+    .auth-badge svg { width: 14px; height: 14px; stroke: #16a34a; fill: none; flex-shrink: 0; }
+    .auth-badge span { font-size: 12px; color: #15803d; font-weight: 500; }
+
+    .input-group { margin-bottom: 18px; }
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+    .input-wrap { position: relative; }
+    .input-wrap svg {
+      position: absolute;
+      left: 13px; top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      stroke: #94a3b8; fill: none;
+      pointer-events: none;
+      transition: stroke 0.2s;
+    }
+    .input-wrap input {
+      width: 100%;
+      padding: 11px 12px 11px 40px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--primary);
+      background: #f8fafc;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .input-wrap input::placeholder { color: #94a3b8; }
+    .input-wrap input:focus {
+      border-color: var(--secondary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .input-wrap input:focus + svg { stroke: var(--secondary); }
+
+    .btn-login {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--secondary), #1d4ed8);
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(59,130,246,0.3);
+      transition: all 0.2s;
+    }
+    .btn-login:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
+    .btn-login:active { transform: translateY(0); }
+    .btn-login:disabled { opacity: 0.7; pointer-events: none; }
+    .btn-login svg { width: 16px; height: 16px; stroke: #fff; fill: none; }
+
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .alert {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      border-radius: 8px;
+      padding: 10px 13px;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .alert svg { width: 14px; height: 14px; fill: none; flex-shrink: 0; }
+    .alert.error { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; }
+    .alert.error svg { stroke: #dc2626; }
+    .alert.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
+    .alert.success svg { stroke: #16a34a; }
+    .alert.show { display: flex; }
+    .alert.error.show { animation: shake 0.35s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a { color: var(--secondary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-<div class="login-box">
-  <h1>Login</h1>
-  <input type="text" id="username" placeholder="Username" />
-  <input type="password" id="password" placeholder="Password" />
-  <button onclick="login()">Login</button>
-  <div id="error" class="error"></div>
-  <p class="note">Only authorized teachers allowed</p>
-</div>
+<nav>
+  <a class="nav-logo" href="/">
+    
+  </a>
+  <a class="nav-back" href="/">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<main>
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <div class="card-header">
+        <div class="header-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        </div>
+        <h1>Faculty Login</h1>
+      </div>
+
+      <div class="card-body">
+
+        <div class="auth-badge">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span>Authorized teachers and faculty members only</span>
+        </div>
+
+        <div class="input-group">
+          <label>Username</label>
+          <div class="input-wrap">
+            <input type="text" id="username" placeholder="Enter your username" autocomplete="off" />
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" placeholder="Enter your password"
+              onkeydown="if(event.key==='Enter') login()" />
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+        </div>
+
+        <button class="btn-login" id="loginBtn" onclick="login()">
+          <svg id="btnIcon" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          <span id="btnText">Sign In</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+
+        <div class="alert error" id="errorAlert">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span id="errorText">Invalid username or password.</span>
+        </div>
+
+        <div class="alert success" id="successAlert">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Login successful! Redirecting...</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2025 <a href="/">Life Set Computer Training Institute</a> · All Rights Reserved
+</footer>
 
 <script>
-  // simple hardcoded auth (frontend only)
   const USER = "lscti";
   const PASS = "1234";
 
   function login() {
-    const u = document.getElementById('username').value;
+    const u = document.getElementById('username').value.trim();
     const p = document.getElementById('password').value;
-    const err = document.getElementById('error');
+    const btn       = document.getElementById('loginBtn');
+    const btnText   = document.getElementById('btnText');
+    const btnIcon   = document.getElementById('btnIcon');
+    const spinner   = document.getElementById('spinner');
+    const errorAlert   = document.getElementById('errorAlert');
+    const successAlert = document.getElementById('successAlert');
+    const errorText    = document.getElementById('errorText');
 
-    if (u === USER && p === PASS) {
-      localStorage.setItem('lscti', 'true');
-      window.location.href = 'faculties/main.html';
-    } else {
-      err.textContent = 'Invalid username or password';
+    errorAlert.classList.remove('show');
+    successAlert.classList.remove('show');
+
+    if (!u || !p) {
+      errorText.textContent = 'Please fill in both fields.';
+      errorAlert.classList.add('show');
+      return;
     }
+
+    btn.disabled = true;
+    btnText.textContent = 'Signing in...';
+    btnIcon.style.display = 'none';
+    spinner.style.display = 'block';
+
+    setTimeout(() => {
+      if (u === USER && p === PASS) {
+        localStorage.setItem('lscti', 'true');
+        spinner.style.display = 'none';
+        btnText.textContent = 'Redirecting...';
+        successAlert.classList.add('show');
+        setTimeout(() => { window.location.href = 'faculties/main.html'; }, 800);
+      } else {
+        btn.disabled = false;
+        btnText.textContent = 'Sign In';
+        btnIcon.style.display = 'block';
+        spinner.style.display = 'none';
+        errorText.textContent = 'Invalid username or password.';
+        errorAlert.classList.add('show');
+      }
+    }, 900);
   }
 </script>
 

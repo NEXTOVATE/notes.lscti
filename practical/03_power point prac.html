@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LSCTI | MS PowerPoint Practical</title>
+  <link rel="shortcut icon" href="../images/favicon2.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:#1e293b; --secondary:#3b82f6; --accent:#6dc854;
+      --danger:#ef4444; --bg:#f1f5f9; --white:#ffffff;
+      --text:#334155; --muted:#64748b; --border:#e2e8f0;
+      --ppt:#c43e1c;
+    }
+    html,body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+    .page{max-width:1100px;margin:0 auto;padding:28px 20px 60px;}
+
+    /* HERO */
+    .hero{background:linear-gradient(135deg,var(--primary) 0%,#2d1a0e 100%);border-radius:16px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px;position:relative;overflow:hidden;animation:fadeUp .4s ease both;}
+    .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(196,62,28,.15);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-30px;left:20%;width:120px;height:120px;background:rgba(109,200,84,.08);border-radius:50%;}
+    .hero-left{display:flex;align-items:center;gap:14px;position:relative;z-index:1;}
+    .hero-icon{width:52px;height:52px;background:linear-gradient(135deg,var(--ppt),#a33010);border-radius:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(196,62,28,.4);flex-shrink:0;font-size:24px;}
+    .hero-title h1{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px;}
+    .hero-title p{font-size:13px;color:#94a3b8;margin-top:3px;}
+    .hero-stats{display:flex;gap:20px;position:relative;z-index:1;}
+    .stat .stat-num{font-size:22px;font-weight:700;color:#fff;line-height:1;}
+    .stat .stat-lbl{font-size:11px;color:#64748b;margin-top:2px;}
+
+    /* PROGRESS */
+    .progress-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;margin-bottom:18px;display:flex;align-items:center;gap:16px;animation:fadeUp .4s .03s ease both;}
+    .progress-info{flex:1;}
+    .progress-info p{font-size:12px;color:var(--muted);margin-bottom:6px;}
+    .progress-bar-bg{height:6px;background:#f1f5f9;border-radius:99px;overflow:hidden;}
+    .progress-bar{height:100%;background:linear-gradient(90deg,var(--ppt),#f97316);border-radius:99px;transition:width .5s ease;}
+    .progress-pct{font-size:20px;font-weight:700;color:var(--primary);white-space:nowrap;}
+
+    /* FILTERS */
+    .filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;animation:fadeUp .4s .05s ease both;}
+    .filter-lbl{font-size:12px;font-weight:600;color:var(--muted);margin-right:4px;}
+    .filter-btn{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--muted);transition:all .18s;font-family:'Inter',sans-serif;}
+    .filter-btn:hover{border-color:var(--ppt);color:var(--ppt);}
+    .filter-btn.active{background:var(--ppt);border-color:var(--ppt);color:#fff;}
+
+    /* GRID */
+    .tasks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+
+    /* CARD */
+    .task-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .22s;animation:fadeUp .4s ease both;box-shadow:0 1px 6px rgba(0,0,0,.04);}
+    .task-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09);border-color:#cbd5e1;}
+    .card-top{padding:15px 17px 12px;display:flex;align-items:flex-start;gap:11px;}
+    .q-num{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+    .card-hd{flex:1;}
+    .card-title{font-size:14px;font-weight:600;color:var(--primary);line-height:1.4;}
+    .card-meta{display:flex;align-items:center;gap:5px;margin-top:5px;flex-wrap:wrap;}
+    .badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:50px;letter-spacing:.2px;}
+
+    /* category colors */
+    .cat-slides   .q-num,.cat-slides   .badge-cat{background:#fee2e2;color:#b91c1c;}
+    .cat-design   .q-num,.cat-design   .badge-cat{background:#fef3c7;color:#b45309;}
+    .cat-anim     .q-num,.cat-anim     .badge-cat{background:#ede9fe;color:#6d28d9;}
+    .cat-media    .q-num,.cat-media    .badge-cat{background:#dcfce7;color:#15803d;}
+    .cat-present  .q-num,.cat-present  .badge-cat{background:#dbeafe;color:#1d4ed8;}
+    .cat-advanced .q-num,.cat-advanced .badge-cat{background:#ffedd5;color:#c2410c;}
+    .badge-easy{background:#dcfce7;color:#15803d;}
+    .badge-med {background:#fef3c7;color:#b45309;}
+    .badge-hard{background:#fee2e2;color:#b91c1c;}
+
+    .card-body{padding:0 17px 12px;}
+    .task-desc{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+    .data-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:10px 0 5px;}
+
+    .mini-table{width:100%;border-collapse:collapse;font-size:11px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:8px;}
+    .mini-table th{background:#f8fafc;padding:5px 8px;text-align:left;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);}
+    .mini-table td{padding:4px 8px;color:var(--text);border-bottom:1px solid #f1f5f9;}
+    .mini-table tr:last-child td{border-bottom:none;}
+    .mini-table tr:nth-child(even) td{background:#fafbfc;}
+    .mini-table .th-pp{background:#c43e1c;color:#fff;font-weight:600;}
+    .mini-table .th-pp2{background:#e05a38;color:#fff;font-weight:600;}
+
+    /* slide preview box */
+    .slide-preview{background:#1e293b;border-radius:10px;padding:14px 16px;margin-bottom:10px;position:relative;overflow:hidden;}
+    .slide-preview::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,62,28,.15),transparent);}
+    .slide-preview .slide-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;position:relative;z-index:1;}
+    .slide-preview .slide-sub{font-size:11px;color:#94a3b8;position:relative;z-index:1;}
+    .slide-preview .slide-num{position:absolute;top:10px;right:12px;font-size:10px;color:#475569;background:rgba(255,255,255,.08);padding:2px 7px;border-radius:50px;z-index:1;}
+
+    .steps-list{list-style:none;margin-top:6px;}
+    .steps-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text);padding:3px 0;line-height:1.5;}
+    .step-n{width:18px;height:18px;border-radius:50%;background:var(--ppt);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+    .info-box{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:8px 12px;font-size:12px;color:#c2410c;margin-bottom:8px;}
+    .warn-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;font-size:12px;color:#92400e;margin-bottom:8px;}
+    .sample-box{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text);margin-bottom:8px;line-height:1.8;}
+
+    .card-footer{padding:10px 17px 13px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f1f5f9;}
+    .done-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;}
+    .done-check input{display:none;}
+    .checkmark{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+    .done-check input:checked~.checkmark{background:var(--accent);border-color:var(--accent);}
+    .done-check input:checked~.checkmark::after{content:'✓';font-size:11px;color:#fff;font-weight:700;}
+    .done-check input:checked~span{color:var(--accent);font-weight:600;text-decoration:line-through;}
+    .card-qn{font-size:11px;color:#94a3b8;font-weight:500;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .task-card:nth-child(1){animation-delay:.04s}.task-card:nth-child(2){animation-delay:.07s}.task-card:nth-child(3){animation-delay:.10s}.task-card:nth-child(4){animation-delay:.13s}.task-card:nth-child(5){animation-delay:.16s}.task-card:nth-child(6){animation-delay:.19s}.task-card:nth-child(7){animation-delay:.22s}.task-card:nth-child(8){animation-delay:.25s}.task-card:nth-child(9){animation-delay:.28s}.task-card:nth-child(10){animation-delay:.31s}.task-card:nth-child(11){animation-delay:.34s}.task-card:nth-child(12){animation-delay:.37s}.task-card:nth-child(13){animation-delay:.40s}.task-card:nth-child(14){animation-delay:.43s}
+
+    @media(max-width:640px){.hero{padding:18px;}.tasks-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-icon">📊</div>
+      <div class="hero-title">
+        <h1>MS PowerPoint — Practical Tasks</h1>
+        <p>Life Set Computer Training Institute · Presentation Workbook</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">14</div><div class="stat-lbl">Total Tasks</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Topics</div></div>
+      <div class="stat"><div class="stat-num">Free</div><div class="stat-lbl">Access</div></div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <p>Your Progress — <strong id="doneCount">0</strong> of 14 tasks completed</p>
+      <div class="progress-bar-bg"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    </div>
+    <div class="progress-pct" id="progressPct">0%</div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <span class="filter-lbl">Filter:</span>
+    <button class="filter-btn active" onclick="filterCards('all',this)">All (14)</button>
+    <button class="filter-btn" onclick="filterCards('slides',this)">🖼️ Slides</button>
+    <button class="filter-btn" onclick="filterCards('design',this)">🎨 Design</button>
+    <button class="filter-btn" onclick="filterCards('anim',this)">✨ Animation</button>
+    <button class="filter-btn" onclick="filterCards('media',this)">🖼️ Media</button>
+    <button class="filter-btn" onclick="filterCards('present',this)">🎤 Presenting</button>
+    <button class="filter-btn" onclick="filterCards('advanced',this)">⭐ Advanced</button>
+  </div>
+
+  <!-- CARDS -->
+  <div class="tasks-grid" id="tasksGrid">
+
+    <!-- Q1 -->
+    <div class="task-card cat-slides" data-cat="slides">
+      <div class="card-top">
+        <div class="q-num">1</div>
+        <div class="card-hd">
+          <div class="card-title">Create a Basic Presentation — 5 Slides</div>
+          <div class="card-meta"><span class="badge badge-cat">Slides</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a 5-slide presentation on <strong>"Introduction to Computers"</strong> using the content below.</p>
+        <div class="data-label">📋 Slide content:</div>
+        <div class="slide-preview"><span class="slide-num">Slide 1</span><div class="slide-title">Introduction to Computers</div><div class="slide-sub">Presented by: [Your Name] | LSCTI</div></div>
+        <div class="slide-preview"><span class="slide-num">Slide 2</span><div class="slide-title">What is a Computer?</div><div class="slide-sub">An electronic device that processes data and gives output.</div></div>
+        <div class="slide-preview"><span class="slide-num">Slide 3</span><div class="slide-title">Parts of a Computer</div><div class="slide-sub">CPU • Monitor • Keyboard • Mouse • Printer</div></div>
+        <div class="slide-preview"><span class="slide-num">Slide 4</span><div class="slide-title">Uses of Computer</div><div class="slide-sub">Education • Business • Entertainment • Banking • Healthcare</div></div>
+        <div class="slide-preview"><span class="slide-num">Slide 5</span><div class="slide-title">Thank You!</div><div class="slide-sub">Any Questions? | Contact: lscti.com</div></div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Open PowerPoint → Blank Presentation</li>
+          <li><div class="step-n">2</div>Add 5 slides using: Home → New Slide</li>
+          <li><div class="step-n">3</div>Use Title Slide layout for Slide 1, Title & Content for rest</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.1 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="task-card cat-slides" data-cat="slides">
+      <div class="card-top">
+        <div class="q-num">2</div>
+        <div class="card-hd">
+          <div class="card-title">Slide Layouts — Use Different Layouts</div>
+          <div class="card-meta"><span class="badge badge-cat">Slides</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a 6-slide presentation using <strong>6 different slide layouts</strong> as listed below.</p>
+        <div class="data-label">📋 Use these layouts (one per slide):</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Slide</th><th class="th-pp">Layout to Use</th><th class="th-pp">Content</th></tr>
+          <tr><td>1</td><td>Title Slide</td><td>LSCTI Computer Course</td></tr>
+          <tr><td>2</td><td>Title & Content</td><td>Course List with bullet points</td></tr>
+          <tr><td>3</td><td>Two Content</td><td>Left: MS Office | Right: Programming</td></tr>
+          <tr><td>4</td><td>Title Only</td><td>Our Faculty Team</td></tr>
+          <tr><td>5</td><td>Blank</td><td>Add a shape and text box manually</td></tr>
+          <tr><td>6</td><td>Picture with Caption</td><td>Insert any image with caption</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Home → Layout → select the layout for each slide</li>
+          <li><div class="step-n">2</div>Fill in content as shown above</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.2 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="task-card cat-design" data-cat="design">
+      <div class="card-top">
+        <div class="q-num">3</div>
+        <div class="card-hd">
+          <div class="card-title">Apply Theme & Background</div>
+          <div class="card-meta"><span class="badge badge-cat">Design</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Open the presentation from Q1. Apply a theme, change background, and customize colors.</p>
+        <div class="data-label">📋 Apply these design settings:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Setting</th><th class="th-pp">Value</th></tr>
+          <tr><td>Theme</td><td>Design tab → pick "Wisp" or "Ion"</td></tr>
+          <tr><td>Variant</td><td>Choose a color variant (blue/orange)</td></tr>
+          <tr><td>Background Style</td><td>Design → Format Background → Gradient fill</td></tr>
+          <tr><td>Gradient</td><td>From Dark Blue to Light Blue</td></tr>
+          <tr><td>Font Theme</td><td>Design → Variants → Fonts → pick "Office Classic"</td></tr>
+          <tr><td>Slide Size</td><td>Design → Slide Size → Widescreen 16:9</td></tr>
+        </table>
+        <div class="info-box">💡 "Apply to All" applies background to every slide at once!</div>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.3 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="task-card cat-design" data-cat="design">
+      <div class="card-top">
+        <div class="q-num">4</div>
+        <div class="card-hd">
+          <div class="card-title">Slide Master — Consistent Branding</div>
+          <div class="card-meta"><span class="badge badge-cat">Design</span><span class="badge badge-hard">Hard</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Use <strong>Slide Master</strong> to add a logo, institute name, and consistent footer to all slides at once.</p>
+        <div class="data-label">📋 Add these elements in Slide Master:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Element</th><th class="th-pp">Where</th><th class="th-pp">Content</th></tr>
+          <tr><td>Institute Name</td><td>Top-left corner</td><td>LSCTI (Bold, 10pt, White)</td></tr>
+          <tr><td>Footer Text</td><td>Bottom-left</td><td>Life Set Computer Training Institute</td></tr>
+          <tr><td>Page Number</td><td>Bottom-right</td><td>Insert Slide Number placeholder</td></tr>
+          <tr><td>Logo Shape</td><td>Top-right</td><td>Small rectangle with "LS" text, blue bg</td></tr>
+          <tr><td>Horizontal Line</td><td>Below header</td><td>Draw line, color: orange</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>View → Slide Master → edit the Master Slide (top one)</li>
+          <li><div class="step-n">2</div>Add all elements → Close Master View</li>
+          <li><div class="step-n">3</div>All slides now show these elements automatically!</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.4 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="task-card cat-anim" data-cat="anim">
+      <div class="card-top">
+        <div class="q-num">5</div>
+        <div class="card-hd">
+          <div class="card-title">Slide Transitions</div>
+          <div class="card-meta"><span class="badge badge-cat">Animation</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Apply <strong>different transitions</strong> to each slide of your presentation.</p>
+        <div class="data-label">📋 Apply these transitions:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Slide</th><th class="th-pp">Transition</th><th class="th-pp">Duration</th><th class="th-pp">Sound</th></tr>
+          <tr><td>Slide 1</td><td>Fade</td><td>1.5 sec</td><td>None</td></tr>
+          <tr><td>Slide 2</td><td>Push (Left)</td><td>1.0 sec</td><td>None</td></tr>
+          <tr><td>Slide 3</td><td>Wipe (Right)</td><td>0.75 sec</td><td>None</td></tr>
+          <tr><td>Slide 4</td><td>Zoom</td><td>1.0 sec</td><td>None</td></tr>
+          <tr><td>Slide 5</td><td>Curtains</td><td>2.0 sec</td><td>Applause</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Click each slide → Transitions tab → pick transition</li>
+          <li><div class="step-n">2</div>Set Duration and Sound for each</li>
+          <li><div class="step-n">3</div>Click "Apply to All" to use same transition everywhere (optional)</li>
+          <li><div class="step-n">4</div>Press F5 to preview the full presentation</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.5 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="task-card cat-anim" data-cat="anim">
+      <div class="card-top">
+        <div class="q-num">6</div>
+        <div class="card-hd">
+          <div class="card-title">Object Animations — Entrance & Exit</div>
+          <div class="card-meta"><span class="badge badge-cat">Animation</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">On one slide, add <strong>4 objects</strong> and apply different animation effects to each.</p>
+        <div class="data-label">📋 Create this slide content:</div>
+        <div class="sample-box">
+          <strong>Title:</strong> "Benefits of Computer Education"<br>
+          <strong>Bullet 1:</strong> Better Job Opportunities<br>
+          <strong>Bullet 2:</strong> Increased Productivity<br>
+          <strong>Bullet 3:</strong> Digital Communication<br>
+          <strong>Image:</strong> Insert any relevant clipart/image
+        </div>
+        <div class="data-label">📋 Apply these animations:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Object</th><th class="th-pp">Animation</th><th class="th-pp">Start</th><th class="th-pp">Delay</th></tr>
+          <tr><td>Title</td><td>Fly In (from Top)</td><td>On Click</td><td>0 sec</td></tr>
+          <tr><td>Bullet 1</td><td>Fade</td><td>After Previous</td><td>0.5 sec</td></tr>
+          <tr><td>Bullet 2</td><td>Float In</td><td>After Previous</td><td>0.5 sec</td></tr>
+          <tr><td>Bullet 3</td><td>Zoom</td><td>After Previous</td><td>0.5 sec</td></tr>
+          <tr><td>Image</td><td>Spin (Exit)</td><td>On Click</td><td>0 sec</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Click object → Animations tab → pick effect</li>
+          <li><div class="step-n">2</div>Open Animation Pane (Animations → Animation Pane) to manage order</li>
+          <li><div class="step-n">3</div>Set Start, Duration, Delay for each in the pane</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.6 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="task-card cat-media" data-cat="media">
+      <div class="card-top">
+        <div class="q-num">7</div>
+        <div class="card-hd">
+          <div class="card-title">Insert Images, Shapes & Icons</div>
+          <div class="card-meta"><span class="badge badge-cat">Media</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a slide with a proper layout using images, shapes, and icons.</p>
+        <div class="data-label">📋 Insert and format these elements:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Element</th><th class="th-pp">What to do</th></tr>
+          <tr><td>Image</td><td>Insert → Pictures → any computer image. Resize to 5cm × 5cm</td></tr>
+          <tr><td>Rectangle</td><td>Insert → Shapes → Rectangle. Fill: Blue gradient. Add text inside</td></tr>
+          <tr><td>Circle</td><td>Insert → Shapes → Oval (hold Shift for circle). Fill: Orange</td></tr>
+          <tr><td>Arrow</td><td>Insert → Shapes → Arrow. Point from circle to rectangle</td></tr>
+          <tr><td>Text Box</td><td>Insert → Text Box. Type "LSCTI" in bold 20pt</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Right-click image → Size & Position to set exact size</li>
+          <li><div class="step-n">2</div>Select multiple shapes → Shape Format → Align → Align Center</li>
+          <li><div class="step-n">3</div>Group all: select all → right-click → Group</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.7 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="task-card cat-media" data-cat="media">
+      <div class="card-top">
+        <div class="q-num">8</div>
+        <div class="card-hd">
+          <div class="card-title">Insert Chart — Bar & Pie Chart</div>
+          <div class="card-meta"><span class="badge badge-cat">Media</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create two slides — one with a <strong>Bar Chart</strong> and one with a <strong>Pie Chart</strong> using the data below.</p>
+        <div class="data-label">📋 Data for Bar Chart — Student Enrollment:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Course</th><th class="th-pp">2022</th><th class="th-pp">2023</th><th class="th-pp">2024</th></tr>
+          <tr><td>MS Office</td><td>45</td><td>60</td><td>75</td></tr>
+          <tr><td>Tally Prime</td><td>30</td><td>42</td><td>55</td></tr>
+          <tr><td>Python</td><td>20</td><td>35</td><td>50</td></tr>
+          <tr><td>C Language</td><td>25</td><td>28</td><td>32</td></tr>
+        </table>
+        <div class="data-label">📋 Data for Pie Chart — Course Popularity (2024):</div>
+        <table class="mini-table">
+          <tr><th class="th-pp2">Course</th><th class="th-pp2">Students</th></tr>
+          <tr><td>MS Office</td><td>75</td></tr>
+          <tr><td>Tally Prime</td><td>55</td></tr>
+          <tr><td>Python</td><td>50</td></tr>
+          <tr><td>C Language</td><td>32</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Insert → Chart → Clustered Bar → enter data in spreadsheet</li>
+          <li><div class="step-n">2</div>Add Chart Title: "Student Enrollment 2022–2024"</li>
+          <li><div class="step-n">3</div>New slide → Insert → Chart → Pie → enter 2024 data</li>
+          <li><div class="step-n">4</div>Right-click pie → Add Data Labels → Show Percentage</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.8 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="task-card cat-media" data-cat="media">
+      <div class="card-top">
+        <div class="q-num">9</div>
+        <div class="card-hd">
+          <div class="card-title">SmartArt — Process & Hierarchy</div>
+          <div class="card-meta"><span class="badge badge-cat">Media</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create two slides using <strong>SmartArt</strong> — one showing a process flow and one showing an org chart.</p>
+        <div class="data-label">📋 Slide 1 — Process SmartArt:</div>
+        <div class="sample-box">
+          Input → Processing → Output → Storage<br>
+          <em>(Use: SmartArt → Process → Basic Chevron)</em>
+        </div>
+        <div class="data-label">📋 Slide 2 — Hierarchy/Org Chart:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Level</th><th class="th-pp">Name / Role</th></tr>
+          <tr><td>Level 1</td><td>Director</td></tr>
+          <tr><td>Level 2</td><td>HOD — CS | HOD — Commerce</td></tr>
+          <tr><td>Level 3</td><td>Teacher A | Teacher B | Teacher C</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Insert → SmartArt → Process → Basic Chevron → fill text</li>
+          <li><div class="step-n">2</div>New slide → Insert → SmartArt → Hierarchy → Organization Chart</li>
+          <li><div class="step-n">3</div>SmartArt Design → Change Colors → pick colorful variant</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.9 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="task-card cat-anim" data-cat="anim">
+      <div class="card-top">
+        <div class="q-num">10</div>
+        <div class="card-hd">
+          <div class="card-title">Hyperlinks & Action Buttons</div>
+          <div class="card-meta"><span class="badge badge-cat">Animation</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a <strong>navigation menu slide</strong> with hyperlinks to jump between slides, and add action buttons.</p>
+        <div class="data-label">📋 Create a Menu Slide (Slide 2) with these buttons:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Button Text</th><th class="th-pp">Links To</th></tr>
+          <tr><td>📊 About LSCTI</td><td>Slide 3</td></tr>
+          <tr><td>📚 Our Courses</td><td>Slide 4</td></tr>
+          <tr><td>👨‍🏫 Our Faculty</td><td>Slide 5</td></tr>
+          <tr><td>📞 Contact Us</td><td>Slide 6</td></tr>
+          <tr><td>🌐 Visit Website</td><td>https://lscti.com</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Draw a rectangle button → type text → select it</li>
+          <li><div class="step-n">2</div>Insert → Link → select "Place in This Document" → choose slide</li>
+          <li><div class="step-n">3</div>For website: Insert → Link → paste URL</li>
+          <li><div class="step-n">4</div>Insert → Action Buttons → "Home" button on every slide to go back to menu</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.10 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="task-card cat-present" data-cat="present">
+      <div class="card-top">
+        <div class="q-num">11</div>
+        <div class="card-hd">
+          <div class="card-title">Slide Show Settings & Rehearse Timings</div>
+          <div class="card-meta"><span class="badge badge-cat">Presenting</span><span class="badge badge-med">Medium</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Set up your presentation for a <strong>self-running kiosk display</strong> using slide timings and show settings.</p>
+        <div class="data-label">📋 Apply these settings:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Setting</th><th class="th-pp">Value</th></tr>
+          <tr><td>Show Type</td><td>Browsed at a kiosk (full screen)</td></tr>
+          <tr><td>Advance Slides</td><td>Using timings (not on click)</td></tr>
+          <tr><td>Slide 1 timing</td><td>5 seconds</td></tr>
+          <tr><td>Slide 2 timing</td><td>8 seconds</td></tr>
+          <tr><td>Other slides</td><td>6 seconds each</td></tr>
+          <tr><td>Loop</td><td>Loop continuously until Esc</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Slide Show → Set Up Slide Show → Browsed at kiosk → Loop</li>
+          <li><div class="step-n">2</div>Slide Show → Rehearse Timings → advance slides manually</li>
+          <li><div class="step-n">3</div>Or: Transitions → set "After: 00:05" for each slide</li>
+          <li><div class="step-n">4</div>Press F5 to run — it loops automatically!</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.11 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="task-card cat-present" data-cat="present">
+      <div class="card-top">
+        <div class="q-num">12</div>
+        <div class="card-hd">
+          <div class="card-title">Speaker Notes & Handouts</div>
+          <div class="card-meta"><span class="badge badge-cat">Presenting</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Add <strong>Speaker Notes</strong> to each slide and print a <strong>Handout</strong> layout (3 slides per page).</p>
+        <div class="data-label">📋 Add these notes to slides:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Slide</th><th class="th-pp">Speaker Note to Add</th></tr>
+          <tr><td>Slide 1</td><td>Greet the audience. Introduce yourself and LSCTI.</td></tr>
+          <tr><td>Slide 2</td><td>Ask students: "Have you used a computer before?"</td></tr>
+          <tr><td>Slide 3</td><td>Point to each part on the board while explaining.</td></tr>
+          <tr><td>Slide 4</td><td>Give real-life examples for each use case.</td></tr>
+          <tr><td>Slide 5</td><td>Open Q&A session. Thank everyone.</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Click each slide → Notes panel (bottom) → type notes</li>
+          <li><div class="step-n">2</div>View → Notes Page to see how it looks when printed</li>
+          <li><div class="step-n">3</div>File → Print → Settings → Handouts → 3 Slides per page</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.12 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="task-card cat-advanced" data-cat="advanced">
+      <div class="card-top">
+        <div class="q-num">13</div>
+        <div class="card-hd">
+          <div class="card-title">Create a Full Project Presentation — LSCTI</div>
+          <div class="card-meta"><span class="badge badge-cat">Advanced</span><span class="badge badge-hard">Hard</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Create a <strong>complete 8-slide professional presentation</strong> on LSCTI using all skills learned. This is your final project!</p>
+        <div class="data-label">📋 Slide plan:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Slide</th><th class="th-pp">Content</th><th class="th-pp">Must Include</th></tr>
+          <tr><td>1</td><td>Title — LSCTI</td><td>WordArt title, subtitle, your name</td></tr>
+          <tr><td>2</td><td>About LSCTI</td><td>Text + relevant image</td></tr>
+          <tr><td>3</td><td>Courses Offered</td><td>SmartArt list</td></tr>
+          <tr><td>4</td><td>Enrollment Data</td><td>Bar chart (Q8 data)</td></tr>
+          <tr><td>5</td><td>Course Popularity</td><td>Pie chart (Q8 data)</td></tr>
+          <tr><td>6</td><td>Our Team</td><td>Org chart SmartArt</td></tr>
+          <tr><td>7</td><td>Contact Info</td><td>Table with contact details</td></tr>
+          <tr><td>8</td><td>Thank You</td><td>Animation + transition</td></tr>
+        </table>
+        <div class="warn-box">⚠️ Use Slide Master for consistent branding across all slides!</div>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Set up Slide Master first (Q4)</li>
+          <li><div class="step-n">2</div>Apply a professional theme</li>
+          <li><div class="step-n">3</div>Add transitions + animations</li>
+          <li><div class="step-n">4</div>Add speaker notes to every slide</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.13 / 14</span>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="task-card cat-advanced" data-cat="advanced">
+      <div class="card-top">
+        <div class="q-num">14</div>
+        <div class="card-hd">
+          <div class="card-title">Save & Export — PDF, Video & Template</div>
+          <div class="card-meta"><span class="badge badge-cat">Advanced</span><span class="badge badge-easy">Easy</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="task-desc">Save your Q13 project presentation in <strong>3 different formats</strong> as shown below.</p>
+        <div class="data-label">📋 Export in these formats:</div>
+        <table class="mini-table">
+          <tr><th class="th-pp">Format</th><th class="th-pp">Steps</th><th class="th-pp">Use</th></tr>
+          <tr><td><strong>.pptx</strong></td><td>Ctrl+S → Save As PowerPoint</td><td>Edit later</td></tr>
+          <tr><td><strong>.pdf</strong></td><td>File → Export → Create PDF/XPS</td><td>Share / Print</td></tr>
+          <tr><td><strong>.mp4 Video</strong></td><td>File → Export → Create a Video → HD (720p)</td><td>Kiosk / WhatsApp</td></tr>
+          <tr><td><strong>.potx Template</strong></td><td>File → Save As → PowerPoint Template</td><td>Reuse design</td></tr>
+        </table>
+        <ul class="steps-list">
+          <li><div class="step-n">1</div>Save as .pptx first (always keep original!)</li>
+          <li><div class="step-n">2</div>Export as PDF — check "Open file after publishing"</li>
+          <li><div class="step-n">3</div>Export as Video — set "Use Recorded Timings and Narrations"</li>
+          <li><div class="step-n">4</div>Save as Template → reuse for future presentations</li>
+        </ul>
+        <div class="info-box">💡 Video export may take 1–2 minutes depending on number of slides!</div>
+      </div>
+      <div class="card-footer">
+        <label class="done-check"><input type="checkbox" onchange="updateProgress()"><div class="checkmark"></div><span>Mark as Done</span></label>
+        <span class="card-qn">Q.14 / 14</span>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+</div><!-- /page -->
+
+<script>
+  const TOTAL = 14;
+  function updateProgress() {
+    const done = document.querySelectorAll('.done-check input:checked').length;
+    const pct  = Math.round((done / TOTAL) * 100);
+    document.getElementById('doneCount').textContent = done;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.task-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
