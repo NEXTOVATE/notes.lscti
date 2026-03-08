@@ -44,6 +44,7 @@
     .theme-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all var(--tr)}
     .theme-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
     .nav-wa{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;background:#25d366;color:#fff;font-size:.82rem;font-weight:600;border:none;cursor:pointer;transition:all var(--tr)}
+    .nav-pa{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;background:#6200ff;color:#fff;font-size:.82rem;font-weight:600;border:none;cursor:pointer;transition:all var(--tr)}
     .nav-wa:hover{background:#1ebe5d;transform:translateY(-1px)}
     .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
     .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all var(--tr)}
@@ -236,6 +237,7 @@
     <div class="nav-actions">
       <button class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
       <a class="nav-wa" href="/login.html">Login</a>
+      <a class="nav-pa" href="/practical hub.html">Practical</a>
       <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -356,6 +358,7 @@
           <option value="notes/17_word.html">Word</option>
           <option value="notes/04_excel.html">Excel</option>
           <option value="notes/18_power_point.html">Power point</option>
+          <option value="notes/16_ms access.html">MS Access</option>
           <option value="notes/07_charts.html">Types of Charts</option>
           <option value="notes/08_data analysis & statics.html">Data Analysis & Statistics</option>
         </select>
@@ -399,7 +402,7 @@
         <div class="note-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fas fa-terminal"></i></div>
         <div class="note-title">C Language, DOS & Git</div>
         <div class="note-desc">C fundamentals, DOS/CMD commands reference, MS Access, and Git cheatsheet for beginners.</div>
-        <select class="topic-select"><option value="">Select Topic</option><option value="notes/09_c.html">C Language</option><option value="notes/12_dos.html">DOS (CMD)</option><option value="notes/14_git cheetsheet.html">Git Cheatsheet</option><option value="notes/16_ms access.html">MS Access</option></select>
+        <select class="topic-select"><option value="">Select Topic</option><option value="notes/09_c.html">C Language</option><option value="notes/12_dos.html">DOS (CMD)</option><option value="notes/14_git cheetsheet.html">Git Cheatsheet</option></select>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
         
