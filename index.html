@@ -8,6 +8,9 @@
   <meta name="keywords" content="LSCTI, computer notes, PDF, python, HTML, CSS, tally, excel, question papers, free" />
   <meta name="author" content="LSCTI" />
   <title>LSCTI – Life Set Computer Training Institute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
@@ -27,9 +30,11 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);transition:background var(--tr),color var(--tr);overflow-x:hidden}
+    body.no-scroll{overflow:hidden}
     a{text-decoration:none;color:inherit}
     ul{list-style:none}
     section{padding:80px 0}
+    .alt{background:var(--bg2)}
     ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
     .container{max-width:1180px;margin:0 auto;padding:0 24px}
 
@@ -66,6 +71,7 @@
     /* SECTION HEADER */
     .section-header{text-align:center;margin-bottom:52px}
     .section-tag{display:inline-block;padding:4px 16px;border-radius:50px;background:var(--bg2);color:var(--accent);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;border:1px solid var(--border)}
+    .alt .section-tag{background:var(--surface)}
     .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;line-height:1.15}
     .section-title span{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .section-desc{color:var(--text2);margin-top:10px;font-size:.97rem;max-width:500px;margin-inline:auto;line-height:1.65}
@@ -93,36 +99,24 @@
     .stat-num{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);line-height:1}
     .stat-label{font-size:.78rem;color:var(--text2);margin-top:3px}
     .hero-visual{display:flex;justify-content:center;align-items:center}
-    .hero-card-stack{position:relative;width:320px;height:320px}
-    .hcard{position:absolute;border-radius:20px;padding:24px;box-shadow:var(--shadow-h);display:flex;flex-direction:column;gap:10px}
-    .hcard1{background:var(--grad);color:#fff;width:220px;top:0;left:20px;animation:float 7s ease-in-out infinite}
-    .hcard2{background:var(--surface);border:1px solid var(--border);width:200px;bottom:20px;right:0;animation:float 9s ease-in-out infinite reverse}
-    .hcard3{background:var(--grad2);color:#fff;width:160px;bottom:60px;left:0;animation:float 8s 1s ease-in-out infinite}
-    .hcard-icon{font-size:1.6rem}
-    .hcard-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
-    .hcard-sub{font-size:.75rem;opacity:.8}
 
-    /* NOTES */
-    #notes{background:var(--bg2)}
+    /* NOTES / CARDS */
     .notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
     .note-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;margin-bottom:16px}
     .note-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px}
     .note-desc{font-size:.83rem;color:var(--text2);margin-bottom:16px;line-height:1.55}
     .topic-select{width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;cursor:pointer;margin-bottom:16px;transition:border var(--tr)}
     .topic-select:focus{border-color:var(--accent)}
+    .empty-state{grid-column:1/-1;text-align:center;padding:34px 20px;border:1.5px dashed var(--border);border-radius:var(--radius);color:var(--text2);font-size:.93rem;background:var(--surface)}
+    .empty-state i{display:block;font-size:1.6rem;color:var(--accent);margin-bottom:10px}
 
-    /* SP GRID */
-    .sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+    /* SP (practical card) */
     .sp-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 12px;border-radius:50px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}
-    .badge-blue{background:rgba(67,97,238,.12);color:var(--accent)}
     .badge-pink{background:rgba(247,37,133,.12);color:var(--accent3)}
-    .badge-purple{background:rgba(114,9,183,.12);color:var(--accent2)}
-    .badge-green{background:rgba(34,197,94,.12);color:#16a34a}
     .sp-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px}
     .sp-desc{font-size:.83rem;color:var(--text2);margin-bottom:18px;line-height:1.6}
 
     /* UPDATES */
-    #updates{background:var(--bg2)}
     .updates-list{display:flex;flex-direction:column;gap:20px;max-width:700px;margin:0 auto}
     .update-item{display:flex;gap:20px;align-items:flex-start;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:all var(--tr)}
     .update-item:hover{border-color:var(--accent);transform:translateX(4px)}
@@ -177,23 +171,6 @@
     #btt.show{opacity:1;pointer-events:auto}
     #btt:hover{transform:translateY(-3px)}
 
-    /* RESPONSIVE */
-    @media(max-width:960px){
-      .nav-links,.nav-wa{display:none}
-      .hamburger{display:flex}
-      .hero-inner{grid-template-columns:1fr}
-      .hero-visual{display:none}
-      .contact-grid{grid-template-columns:1fr;gap:36px}
-      .footer-grid{grid-template-columns:1fr 1fr}
-      .form-row{grid-template-columns:1fr}
-    }
-    @media(max-width:600px){
-      section{padding:60px 0}
-      .hero-stats{gap:18px}
-      .footer-grid{grid-template-columns:1fr}
-      .footer-bottom{flex-direction:column;text-align:center}
-    }
-
     /* SUBJECT ICONS */
     .subject-icons-wrap{position:relative;width:420px;height:420px;display:flex;align-items:center;justify-content:center}
     .center-ring{position:absolute;width:150px;height:150px;border-radius:50%;background:var(--grad);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 8px 48px rgba(67,97,238,.50);z-index:2}
@@ -212,10 +189,39 @@
     .sicon-4{bottom:0px;left:50%;transform:translateX(-50%);animation:float 9s .3s ease-in-out infinite reverse}
     .sicon-5{bottom:55px;left:15px;animation:float 7.5s .8s ease-in-out infinite}
     .sicon-6{top:55px;left:15px;animation:float 8.5s 1.2s ease-in-out infinite reverse}
-    #Practical{
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    #Practical{display:flex;justify-content:center;align-items:center}
+
+    /* PDF / NOTE VIEWER (iframe popup) */
+    .viewer{position:fixed;inset:0;z-index:2000;background:rgba(5,8,20,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px}
+    .viewer.open{display:flex}
+    .viewer-box{width:100%;max-width:1100px;height:100%;max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-h);display:flex;flex-direction:column;overflow:hidden}
+    .viewer-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .viewer-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .viewer-body{position:relative;flex:1;background:#fff}
+    .viewer-body iframe{width:100%;height:100%;border:0;display:block}
+    .viewer-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:var(--accent);background:var(--surface);transition:opacity .25s}
+    .viewer-loader.hide{opacity:0;pointer-events:none}
+    .viewer-foot{padding:8px 16px;border-top:1px solid var(--border);font-size:.75rem;color:var(--text2);text-align:center}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){
+      .nav-links,.nav-wa{display:none}
+      .hamburger{display:flex}
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{display:none}
+      .contact-grid{grid-template-columns:1fr;gap:36px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      section{padding:60px 0}
+      .hero-stats{gap:18px}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;text-align:center}
+      .viewer{padding:0}
+      .viewer-box{border-radius:0;max-height:100vh;max-height:100dvh;border:none}
+      .viewer-head{padding:10px 12px}
+      .viewer-head .btn span{display:none}
     }
   </style>
 </head>
@@ -235,10 +241,10 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
       <a class="nav-wa" href="/login.html">Login</a>
       <a class="nav-pa" href="/practical hub.html">Practical</a>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -250,7 +256,7 @@
   <a href="#papers" onclick="closeMob()">Papers</a>
   <a href="#updates" onclick="closeMob()">Updates</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
-  <a href="/login.html" target="_blank" style="color:#25d366;font-weight:700;background-color:var(--bg2);" >Login</a>
+  <a href="/login.html" target="_blank" style="color:#25d366;font-weight:700;background-color:var(--bg2);">Login</a>
 </div>
 
 <!-- HERO -->
@@ -269,9 +275,9 @@
           <a href="https://wa.me/919289882752" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Chat with Us</a>
         </div>
         <div class="hero-stats">
-          <div><div class="stat-num">20+</div><div class="stat-label">Notes PDFs</div></div>
-          <div><div class="stat-num">2</div><div class="stat-label">Projects</div></div>
-          <div><div class="stat-num">10+</div><div class="stat-label">Question Papers</div></div>
+          <div id="statNotesWrap"><div class="stat-num" id="statNotes">20+</div><div class="stat-label">Notes</div></div>
+          <div id="statProjectsWrap"><div class="stat-num" id="statProjects">0</div><div class="stat-label">Projects</div></div>
+          <div id="statPapersWrap"><div class="stat-num" id="statPapers">0</div><div class="stat-label">Question Papers</div></div>
           <div><div class="stat-num">100%</div><div class="stat-label">Free Access</div></div>
         </div>
       </div>
@@ -285,39 +291,27 @@
             <span>LSCTI<br>Notes</span>
           </div>
           <div class="sicon sicon-1">
-            <div class="sicon-box" style="background:linear-gradient(135deg,#4cc9f0,#4361ee)">
-              <i class="fab fa-python"></i>
-            </div>
+            <div class="sicon-box" style="background:linear-gradient(135deg,#4cc9f0,#4361ee)"><i class="fab fa-python"></i></div>
             <span class="sicon-label">Python</span>
           </div>
           <div class="sicon sicon-2">
-            <div class="sicon-box" style="background:linear-gradient(135deg,#e34c26,#f06529)">
-              <i class="fab fa-html5"></i>
-            </div>
+            <div class="sicon-box" style="background:linear-gradient(135deg,#e34c26,#f06529)"><i class="fab fa-html5"></i></div>
             <span class="sicon-label">HTML & CSS</span>
           </div>
           <div class="sicon sicon-3">
-            <div class="sicon-box" style="background:linear-gradient(135deg,#1d6f42,#22c55e)">
-              <i class="fas fa-table"></i>
-            </div>
+            <div class="sicon-box" style="background:linear-gradient(135deg,#1d6f42,#22c55e)"><i class="fas fa-table"></i></div>
             <span class="sicon-label">MS Excel</span>
           </div>
           <div class="sicon sicon-4">
-            <div class="sicon-box" style="background:linear-gradient(135deg,#7209b7,#560bad)">
-              <i class="fas fa-calculator"></i>
-            </div>
+            <div class="sicon-box" style="background:linear-gradient(135deg,#7209b7,#560bad)"><i class="fas fa-calculator"></i></div>
             <span class="sicon-label">Tally Prime</span>
           </div>
           <div class="sicon sicon-5">
-            <div class="sicon-box" style="background:linear-gradient(135deg,#f72585,#b5179e)">
-              <i class="fas fa-file-alt"></i>
-            </div>
+            <div class="sicon-box" style="background:linear-gradient(135deg,#f72585,#b5179e)"><i class="fas fa-file-alt"></i></div>
             <span class="sicon-label">MS Office</span>
           </div>
           <div class="sicon sicon-6">
-            <div class="sicon-box" style="background:linear-gradient(135deg,#f77f00,#d62828)">
-              <i class="fas fa-terminal"></i>
-            </div>
+            <div class="sicon-box" style="background:linear-gradient(135deg,#f77f00,#d62828)"><i class="fas fa-terminal"></i></div>
             <span class="sicon-label">C & DOS</span>
           </div>
         </div>
@@ -326,275 +320,87 @@
   </div>
 </section>
 
-<!-- NOTES -->   
-<section id="notes">  
+<!-- NOTES (auto-filled from the Sheet) -->
+<section id="notes" class="alt">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-file-alt"></i> Study Notes</div>
       <h2 class="section-title">Computer <span>Notes & PDFs</span></h2>
-      <p class="section-desc">Topic-wise notes organized by subject. Select a topic and visit or download instantly.</p>
+      <p class="section-desc">Topic-wise notes organized by subject. Select a topic and open it instantly.</p>
     </div>
-    <div class="notes-grid">
-      <div class="card fade-in"> 
-        <div class="note-icon" style="background:linear-gradient(135deg,#4361ee,#3a0ca3)"><i class="fas fa-file-alt"></i></div>
-        <div class="note-title">Computer Fundamental & Basic Software</div>
-        <div class="note-desc">Basic text editors – shortcuts, formatting tips, and beginner exercises for all tools.</div>
-        <select class="topic-select"><option value="">Select Topic</option>
-              <option value="notes/20_Computer_funda&parts.html">Computer Fundamentals</option>
-              <option value="notes/01_notepad.html">Notepad</option>
-              <option value="notes/02_wordpad.html">Wordpad</option>
-              <option value="notes/03_paint.html">Paint</option>
-        </select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="note-icon" style="background:linear-gradient(135deg,#f72585,#b5179e)"><i class="fas fa-paint-brush"></i></div>
-        <div class="note-title">Ms office</div>
-        <div class="note-desc">MS word, Excel formulas,Power point, charts, data analysis & statistics notes.</div>
-        <select class="topic-select"><option value="">Select Topic</option>
-
-          <option value="notes/17_word.html">Word</option>
-          <option value="notes/04_excel.html">Excel</option>
-          <option value="notes/18_power_point.html">Power point</option>
-          <option value="notes/16_ms access.html">MS Access</option>
-          <option value="notes/07_charts.html">Types of Charts</option>
-          <option value="notes/08_data analysis & statics.html">Data Analysis & Statistics</option>
-        </select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-         
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="note-icon" style="background:linear-gradient(135deg,#7209b7,#560bad)"><i class="fas fa-calculator"></i></div>
-        <div class="note-title">Tally Prime</div>
-        <div class="note-desc">Accounting software basics – companies, vouchers, balance sheets, and GST entries.</div>
-        <select class="topic-select"><option value="">Select Topic</option>
-            <option value="notes/05_tally.html">Tally Prime Full Notes</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-         
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="note-icon" style="background:linear-gradient(135deg,#4cc9f0,#4361ee)"><i class="fab fa-python"></i></div>
-        <div class="note-title">Python</div>
-        <div class="note-desc">Python cheatsheet, notebooks, data types, loops, functions, OOP and beginner projects.</div>
-        <select class="topic-select"><option value="">Select Topic</option><option value="notes/06_python-cheetsheet.html">Python Cheatsheet</option><option value="notes/15_python notebok.html">Python Notebook</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-         
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="note-icon" style="background:linear-gradient(135deg,#f72585,#4361ee)"><i class="fab fa-html5"></i></div>
-        <div class="note-title">HTML & CSS</div>
-        <div class="note-desc">HTML tags, forms, tables. CSS styling, flexbox, grid, and short notes cheatsheets.</div>
-        <select class="topic-select"><option value="">Select Topic</option><option value="notes/10_html.html">HTML Full Notes</option><option value="notes/11_html-shortnotes.html">HTML Short Notes</option><option value="notes/13_css shortnotes.html">CSS Short Notes</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-          
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="note-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fas fa-terminal"></i></div>
-        <div class="note-title">C Language, DOS & Git</div>
-        <div class="note-desc">C fundamentals, DOS/CMD commands reference, MS Access, and Git cheatsheet for beginners.</div>
-        <select class="topic-select"><option value="">Select Topic</option><option value="notes/09_c.html">C Language</option><option value="notes/12_dos.html">DOS (CMD)</option><option value="notes/14_git cheetsheet.html">Git Cheatsheet</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-        
-        </div>
-      </div>
-
-      <div class="card fade-in">
-        <div class="note-icon" style="background:linear-gradient(135deg,#083fd7,#ff0000)"><i class="fas fa-bullhorn"></i></div>
-        <div class="note-title">Digital Marketing</div>
-        <div class="note-desc">Digital marketing introductin, Email marketing, Google add,Youtuve add,Facebook add</div>
-        <select class="topic-select"><option value="">Select Topic</option><option value="notes/19_email_marketing.html">Email marketing</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-        
-        </div>
-      </div>
-    </div>
+    <div class="notes-grid" id="notesGrid"></div>
   </div>
 </section>
 
-<!-- SYLLABUS -->
+<!-- PRACTICAL -->
 <section id="Practical">
   <div class="container">
     <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-graduation-cap"></i>Class work</div>
+      <div class="section-tag"><i class="fas fa-graduation-cap"></i> Class work</div>
       <h2 class="section-title">Practical <span>Class</span></h2>
-      <p class="section-desc">Select your course and explore the complete syllabus with topic-wise breakdown.</p>
+      <p class="section-desc">All class practicals and exercises, topic by topic, in one place.</p>
     </div>
     <a href="practical hub.html">
       <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fas fa-desktop"></i>Practical hub page</div>
-        <div class="sp-title">Cick here to go on practical hub page</div>
-        <div class="sp-desc">Computer basics, MS Office, internet fundamentals, and programming every thingh.</div>
-        <button class="btn btn-primary btn-sm" ><i class="fas fa-external-link-alt"></i> Open</button>
-      </div>  
-    </a>   
-    
+        <div class="sp-badge badge-pink"><i class="fas fa-desktop"></i> Practical hub page</div>
+        <div class="sp-title">Click here to go to the Practical Hub</div>
+        <div class="sp-desc">Computer basics, MS Office, internet fundamentals and programming — everything in one place.</div>
+        <span class="btn btn-primary btn-sm"><i class="fas fa-external-link-alt"></i> Open</span>
+      </div>
+    </a>
   </div>
 </section>
 
-
-<!-- SYLLABUS -->
-<!-- <section id="syllabus">
+<!-- SYLLABUS (auto-filled from the Sheet) -->
+<section id="syllabus" class="alt">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-graduation-cap"></i> Syllabus</div>
       <h2 class="section-title">Course <span>Syllabus</span></h2>
       <p class="section-desc">Select your course and explore the complete syllabus with topic-wise breakdown.</p>
     </div>
-    <div class="sp-grid">
-      <div class="card fade-in">
-        <div class="sp-badge badge-blue"><i class="fas fa-laptop"></i> ADC</div>
-        <div class="sp-title">Advance Diploma in Computer</div>
-        <div class="sp-desc">Advanced applications, office tools, programming basics, and project work over a comprehensive curriculum.</div>
-        <select class="topic-select"><option value="">Select Course</option><option value="#">ADC Full Syllabus</option></select>
-        <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fas fa-desktop"></i> DCA</div>
-        <div class="sp-title">Diploma in Computer Applications</div>
-        <div class="sp-desc">Computer basics, MS Office, internet fundamentals, and introductory programming for beginners.</div>
-        <select class="topic-select"><option value="">Select Course</option><option value="#">DCA Full Syllabus</option></select>
-        <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-purple"><i class="fab fa-html5"></i> Web Dev</div>
-        <div class="sp-title">Web Development Course</div>
-        <div class="sp-desc">HTML, CSS, JavaScript, responsive design, and a final project to build your own website.</div>
-        <select class="topic-select"><option value="">Select Course</option><option value="#">Web Dev Full Syllabus</option></select>
-        <button class="btn btn-primary btn-sm" onclick="visitNote(this)"><i class="fas fa-external-link-alt"></i> Visit</button>
-      </div>
-    </div>
+    <div class="notes-grid" id="syllabusGrid"></div>
   </div>
-</section> -->
+</section>
 
-<!-- PROJECTS -->
-<!-- <section id="projects" style="background:var(--bg2)">
+<!-- PROJECTS (auto-filled from the Sheet) -->
+<section id="projects">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-code"></i> Projects</div>
       <h2 class="section-title">Student <span>Projects</span></h2>
-      <p class="section-desc">Download source code for HTML/CSS, PHP, and Java projects.</p>
+      <p class="section-desc">Source code and demos of HTML/CSS, PHP and Java projects.</p>
     </div>
-    <div class="sp-grid">
-      <div class="card fade-in">
-        <div class="sp-badge badge-blue"><i class="fab fa-html5"></i> HTML/CSS</div>
-        <div class="sp-title">Web Design Projects</div>
-        <div class="sp-desc">Portfolios, landing pages, and mini websites built with pure HTML & CSS. Great for beginners.</div>
-        <select class="topic-select"><option value="">Select Tech</option><option value="#">HTML/CSS</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Source Code</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</button>
-        </div>
-      </div> 
-      <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fab fa-php"></i> PHP</div>
-        <div class="sp-title">PHP Web Applications</div>
-        <div class="sp-desc">Login systems, student management, and dynamic sites powered by PHP and MySQL.</div>
-        <select class="topic-select"><option value="">Select Tech</option><option value="#">PHP</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Source Code</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</button>
-        </div>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-green"><i class="fab fa-java"></i> Java</div>
-        <div class="sp-title">Java Projects</div>
-        <div class="sp-desc">Console and GUI Java projects – calculators, quiz apps, and inventory management systems.</div>
-        <select class="topic-select"><option value="">Select Tech</option><option value="#">Java</option></select>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Source Code</button>
-          <button class="btn btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</button>
-        </div>
-      </div>
-    </div>
+    <div class="notes-grid" id="projectsGrid"></div>
   </div>
 </section>
 
-QUESTION PAPERS
-<section id="papers">
+<!-- PAPERS (auto-filled from the Sheet) -->
+<section id="papers" class="alt">
   <div class="container">
     <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-scroll"></i> Question Papers</div>
-      <h2 class="section-title">Previous Year <span>Question Papers</span></h2>
-      <p class="section-desc">Practice with real exam papers from previous years and model question sets.</p>
+      <div class="section-tag"><i class="fas fa-file-pen"></i> Papers</div>
+      <h2 class="section-title">Question <span>Papers</span></h2>
+      <p class="section-desc">Previous question papers, organized by subject for easy practice.</p>
     </div>
-    <div class="sp-grid">
-      <div class="card fade-in">
-        <div class="sp-badge badge-blue"><i class="fas fa-calendar-alt"></i> 2023</div>
-        <div class="sp-title">2023 Question Papers</div>
-        <div class="sp-desc">All 2023 exam papers organized by subject. Best for last-minute revision and understanding exam patterns.</div>
-        <select class="topic-select"><option value="">Select Year</option><option value="#">2023 Papers</option></select>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download All</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-pink"><i class="fas fa-calendar-alt"></i> 2022</div>
-        <div class="sp-title">2022 Question Papers</div>
-        <div class="sp-desc">Complete set of 2022 question papers. Identify trends and frequently asked questions per topic.</div>
-        <select class="topic-select"><option value="">Select Year</option><option value="#">2022 Papers</option></select>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download All</button>
-      </div>
-      <div class="card fade-in">
-        <div class="sp-badge badge-purple"><i class="fas fa-file-alt"></i> Model Sets</div>
-        <div class="sp-title">Model Question Sets</div>
-        <div class="sp-desc">Expertly crafted model sets based on the latest syllabus. Practice full exams under timed conditions.</div>
-        <select class="topic-select"><option value="">Select Set</option><option value="#">Model Sets</option></select>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download All</button>
-      </div>
-    </div>
+    <div class="notes-grid" id="papersGrid"></div>
   </div>
-</section> -->
+</section>
 
-<!-- UPDATES -->
+<!-- UPDATES (auto-filled from the Sheet) -->
 <section id="updates">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-bell"></i> Updates</div>
       <h2 class="section-title">Recent <span>Updates</span></h2>
-      <p class="section-desc">Stay up to date with latest additions and improvements to the LSCTI library.</p>
+      <p class="section-desc">Stay up to date with the latest additions and improvements to the LSCTI library.</p>
     </div>
-    <div class="updates-list">
-      <div class="update-item fade-in">
-        <div class="update-date"><div class="update-day">20</div><div class="update-mon">May</div></div>
-        <div>
-          <div class="update-title">New notes Uploaded Email marketing </div>
-          <div class="update-desc">All question papers are now uploaded and available. Organized by topic for easy access.</div>
-          <a href="#notes" class="btn btn-outline btn-sm">View Notes</a>
-        </div>
-      </div>
-      <div class="update-item fade-in">
-        <div class="update-date"><div class="update-day">26</div><div class="update-mon">May</div></div>
-        <div>
-          <div class="update-title">New 50 Excel Funciton 😊</div>
-          <div class="update-desc">50 excel function with categories.</h4></div>
-          <a href="#hero" class="btn btn-outline btn-sm">Explore</a>
-        </div>
-      </div>
-      <div class="update-item fade-in">
-        <div class="update-date"><div class="update-day">01</div><div class="update-mon">June</div></div>
-        <div>
-          <div class="update-title">Upcoming Tally practicals</div>
-          <div class="update-desc">upcoming tally entries and practical </div>
-          <a href="#Practical" class="btn btn-outline btn-sm">Released</a>
-        </div>
-      </div>
-    </div>
+    <div class="updates-list" id="updatesList"></div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" style="background:var(--bg2)">
+<section id="contact" class="alt">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-envelope"></i> Contact</div>
@@ -642,7 +448,7 @@ QUESTION PAPERS
         </a>
       </div>
 
-    <!-- contact form -->
+      <!-- contact form -->
       <div class="fade-in">
         <form class="contact-form" onsubmit="sendMsg(event)">
           <div class="form-row">
@@ -692,14 +498,12 @@ QUESTION PAPERS
         <span class="footer-logo">LSCTI</span>
         <p class="footer-about">Life Set Computer Training Institute – providing high-quality, free computer education resources to every student. Built with love for learners.</p>
         <div class="footer-social-row">
-          <a class="fsoc si-wa" href="https://wa.me/919289882752" target="_blank"><i class="fab fa-whatsapp"></i></a>
-          <a class="fsoc si-yt" href="http://www.youtube.com/@lifesetcomputertrainingins2470" target="_blank"><i class="fab fa-youtube"></i></a>
-          <a class="fsoc si-ig" href="https://www.instagram.com/life_set_computer_institute?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a class="fsoc si-fb" href="https://www.facebook.com/people/Life-Set-Computer-Training-Institute/100063915368878/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a class="fsoc si-mail" href="mailto:lifesetinstitute@gmail.com"><i class="fas fa-envelope"></i></a>
-          <a class="fsoc si-mail" href="https://lscti.com/"><i class="fas fa-globe"></i></a>
-          
-
+          <a class="fsoc si-wa" href="https://wa.me/919289882752" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a class="fsoc si-yt" href="http://www.youtube.com/@lifesetcomputertrainingins2470" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a class="fsoc si-ig" href="https://www.instagram.com/life_set_computer_institute?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a class="fsoc si-fb" href="https://www.facebook.com/people/Life-Set-Computer-Training-Institute/100063915368878/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a class="fsoc si-mail" href="mailto:lifesetinstitute@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a class="fsoc si-mail" href="https://lscti.com/" aria-label="Website"><i class="fas fa-globe"></i></a>
         </div>
       </div>
       <div>
@@ -716,10 +520,8 @@ QUESTION PAPERS
         <ul class="footer-links">
           <li><a href="#hero">Home</a></li>
           <li><a href="#updates">Updates</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-          <li><a href="#">Request Notes</a></li>
+          <li><a href="practical hub.html">Practical Hub</a></li>
+          <li><a href="#contact">Request Notes</a></li>
         </ul>
       </div>
       <div>
@@ -732,53 +534,106 @@ QUESTION PAPERS
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Life Set Computer Training Institute. All Rights Reserved.</span>
+      <span>© <span id="yr">2026</span> Life Set Computer Training Institute. All Rights Reserved.</span>
       <span>Free • Open • Always</span>
     </div>
   </div>
 </footer>
 
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- VIEWER POPUP: notes / PDFs open here inside an iframe -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+  <div class="viewer-box">
+    <div class="viewer-head">
+      <div class="viewer-title" id="viewerTitle">Notes</div>
+      <a class="btn btn-outline btn-sm" id="viewerDl" href="#" target="_blank" rel="noopener" style="display:none"><i class="fas fa-download"></i> <span>Download</span></a>
+      <a class="btn btn-outline btn-sm" id="viewerNew" href="#" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> <span>New tab</span></a>
+      <button class="theme-btn" id="viewerClose" aria-label="Close"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="viewer-body">
+      <div class="viewer-loader" id="viewerLoader"><i class="fas fa-spinner fa-spin"></i></div>
+      <iframe id="viewerFrame" title="Notes viewer" allow="fullscreen"></iframe>
+    </div>
+    <div class="viewer-foot">Not loading? Use the "New tab" button above.</div>
+  </div>
+</div>
 
 <script>
-  // THEME
+  /* =====================================================================
+     SETTINGS  –  sirf ye ek line kabhi badalni hai
+     Google Sheet ka "Publish to web" wala CSV link yahan quotes ke andar paste karo.
+     Khali chhodoge to neeche wala FALLBACK_CSV (purane notes) dikhega.
+     ===================================================================== */
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRttX7OcCyxU5GzGQbuQGIKFKd-88jAjUoRp67uFp2LbpWssatQNyi3C73vyaAhlzmqVeoHhZ9zRxjM/pub?gid=0&single=true&output=csv';
+
+  /* Backup data (Sheet na chale tab bhi site khali nahi dikhegi) */
+  const FALLBACK_CSV = `Section,Category,Name,Link,Date
+Notes,Computer Fundamental & Basic Software,Computer Fundamentals,notes/20_Computer_funda&parts.html,
+Notes,Computer Fundamental & Basic Software,Notepad,notes/01_notepad.html,
+Notes,Computer Fundamental & Basic Software,Wordpad,notes/02_wordpad.html,
+Notes,Computer Fundamental & Basic Software,Paint,notes/03_paint.html,
+Notes,MS Office,Word,notes/17_word.html,
+Notes,MS Office,Excel,notes/04_excel.html,
+Notes,MS Office,PowerPoint,notes/18_power_point.html,
+Notes,MS Office,MS Access,notes/16_ms access.html,
+Notes,MS Office,Types of Charts,notes/07_charts.html,
+Notes,MS Office,Data Analysis & Statistics,notes/08_data analysis & statics.html,
+Notes,Tally Prime,Tally Prime Full Notes,notes/05_tally.html,
+Notes,Python,Python Cheatsheet,notes/06_python-cheetsheet.html,
+Notes,Python,Python Notebook,notes/15_python notebok.html,
+Notes,HTML & CSS,HTML Full Notes,notes/10_html.html,
+Notes,HTML & CSS,HTML Short Notes,notes/11_html-shortnotes.html,
+Notes,HTML & CSS,CSS Short Notes,notes/13_css shortnotes.html,
+"Notes","C Language, DOS & Git",C Language,notes/09_c.html,
+"Notes","C Language, DOS & Git",DOS (CMD),notes/12_dos.html,
+"Notes","C Language, DOS & Git",Git Cheatsheet,notes/14_git cheetsheet.html,
+Notes,Digital Marketing,Email Marketing,notes/19_email_marketing.html,
+Updates,Digital Marketing section now has Email Marketing notes.,New notes uploaded: Email Marketing,#notes,20-05-2025
+Updates,50 Excel functions with categories.,New: 50 Excel Functions,#notes,26-05-2025
+Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practical,01-06-2025`;
+
+  /* =====================================================================
+     THEME / NAV / MISC
+     ===================================================================== */
   const html = document.documentElement;
   const themeBtn = document.getElementById('themeToggle');
-  const saved = localStorage.getItem('lscti-theme') || 'light';
+  const saved = (function(){ try { return localStorage.getItem('lscti-theme'); } catch(e){ return null; } })() || 'light';
   html.setAttribute('data-theme', saved);
   updateIcon(saved);
   themeBtn.addEventListener('click', () => {
     const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
-    localStorage.setItem('lscti-theme', next);
+    try { localStorage.setItem('lscti-theme', next); } catch(e){}
     updateIcon(next);
   });
   function updateIcon(t) { themeBtn.querySelector('i').className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; }
 
-  // HAMBURGER
   const ham = document.getElementById('hamburger');
   const mob = document.getElementById('mobileMenu');
   ham.addEventListener('click', () => mob.classList.toggle('open'));
   function closeMob() { mob.classList.remove('open'); }
 
-  // BACK TO TOP
   const btt = document.getElementById('btt');
   window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 380));
 
-  // FADE IN
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       const siblings = e.target.parentElement.querySelectorAll('.fade-in');
       const idx = Array.from(siblings).indexOf(e.target);
-      e.target.style.transitionDelay = (idx * 0.07) + 's';
+      e.target.style.transitionDelay = (Math.min(idx, 8) * 0.07) + 's';
       e.target.classList.add('visible');
       obs.unobserve(e.target);
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  function observeFades() {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => obs.observe(el));
+  }
+  observeFades();
 
-  // ACTIVE NAV
   const secs = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
     let cur = '';
@@ -788,45 +643,290 @@ QUESTION PAPERS
     });
   });
 
-  // VISIT NOTE
-  function visitNote(btn) {
-    const sel = btn.closest('.card').querySelector('.topic-select');
-    if (!sel) return;
-    const url = sel.value;
-    if (!url) { alert('Please select a topic first!'); return; }
-    // open selected resource in new tab/window
-    window.open(url, '_blank');
+  /* =====================================================================
+     VIEWER  (iframe popup)
+     ===================================================================== */
+  const viewer = document.getElementById('viewer');
+  const vFrame = document.getElementById('viewerFrame');
+  const vLoader = document.getElementById('viewerLoader');
+  const vTitle = document.getElementById('viewerTitle');
+  const vNew = document.getElementById('viewerNew');
+  const vDl = document.getElementById('viewerDl');
+
+  function driveId(url) {
+    let m = url.match(/drive\.google\.com\/file\/d\/([^\/?#]+)/);
+    if (m) return m[1];
+    m = url.match(/drive\.google\.com\/(?:open|uc)\?[^#]*\bid=([^&#]+)/);
+    return m ? m[1] : null;
+  }
+  function toEmbed(url) {
+    const id = driveId(url);
+    if (id) return 'https://drive.google.com/file/d/' + id + '/preview';
+    // Google Docs / Slides / Sheets share links -> preview mode
+    const g = url.match(/^(https:\/\/docs\.google\.com\/(?:document|presentation|spreadsheets)\/d\/[^\/?#]+)/);
+    if (g) return g[1] + '/preview';
+    return url;
+  }
+  function openViewer(link, title) {
+    const src = toEmbed(link);
+    vTitle.textContent = title || 'Notes';
+    vLoader.classList.remove('hide');
+    vFrame.onload = () => vLoader.classList.add('hide');
+    vFrame.src = src;
+    vNew.href = driveId(link) ? 'https://drive.google.com/file/d/' + driveId(link) + '/view' : link;
+    if (driveId(link)) { vDl.href = 'https://drive.google.com/uc?export=download&id=' + driveId(link); vDl.style.display = ''; }
+    else { vDl.style.display = 'none'; }
+    viewer.classList.add('open');
+    document.body.classList.add('no-scroll');
+  }
+  function closeViewer() {
+    viewer.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+    vFrame.onload = null;
+    vFrame.src = 'about:blank';
+  }
+  document.getElementById('viewerClose').addEventListener('click', closeViewer);
+  viewer.addEventListener('click', e => { if (e.target === viewer) closeViewer(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && viewer.classList.contains('open')) closeViewer(); });
+
+  /* =====================================================================
+     SHEET  ->  DATA
+     Columns:  Section | Category | Name | Link | Date
+     ===================================================================== */
+  function parseCSV(t) {
+    const rows = []; let row = [], f = '', q = false;
+    t = t.replace(/^﻿/, '');
+    for (let i = 0; i < t.length; i++) {
+      const c = t[i];
+      if (q) {
+        if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; }
+        else f += c;
+      } else if (c === '"') q = true;
+      else if (c === ',') { row.push(f); f = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && t[i + 1] === '\n') i++; row.push(f); f = ''; rows.push(row); row = []; }
+      else f += c;
+    }
+    if (f !== '' || row.length) { row.push(f); rows.push(row); }
+    return rows;
+  }
+  function normSection(s) {
+    s = (s || '').toLowerCase().trim();
+    if (s.startsWith('note')) return 'notes';
+    if (s.startsWith('syl')) return 'syllabus';
+    if (s.startsWith('proj')) return 'projects';
+    if (s.startsWith('paper') || s.startsWith('question')) return 'papers';
+    if (s.startsWith('update')) return 'updates';
+    return '';
+  }
+  function safeLink(l) {
+    l = (l || '').trim();
+    if (/^(javascript|data|vbscript):/i.test(l)) return '';
+    return l;
+  }
+  function parseDate(s) {
+    s = (s || '').trim(); if (!s) return null;
+    let m = s.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})$/);
+    if (m) return new Date(+m[3], +m[2] - 1, +m[1]);
+    m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+    return null;
+  }
+  function toItems(text) {
+    const rows = parseCSV(text);
+    if (rows.length && /^section$/i.test((rows[0][0] || '').trim())) rows.shift();
+    const items = [];
+    rows.forEach(r => {
+      const section = normSection(r[0]);
+      const category = (r[1] || '').trim();
+      const name = (r[2] || '').trim();
+      if (!section || !name) return;
+      items.push({ section, category, name, link: safeLink(r[3]), date: parseDate(r[4]) });
+    });
+    return items;
   }
 
- 
+  /* =====================================================================
+     LOOK OF EACH CATEGORY CARD  (naya category aaye to bhi default look milega)
+     ===================================================================== */
+  const CATEGORY_META = {
+    'computer fundamental & basic software': { icon: 'fas fa-file-alt', grad: 'linear-gradient(135deg,#4361ee,#3a0ca3)', desc: 'Basic text editors – shortcuts, formatting tips, and beginner exercises for all tools.' },
+    'ms office':   { icon: 'fas fa-paint-brush', grad: 'linear-gradient(135deg,#f72585,#b5179e)', desc: 'MS Word, Excel formulas, PowerPoint, charts, data analysis & statistics notes.' },
+    'tally prime': { icon: 'fas fa-calculator', grad: 'linear-gradient(135deg,#7209b7,#560bad)', desc: 'Accounting software basics – companies, vouchers, balance sheets, and GST entries.' },
+    'python':      { icon: 'fab fa-python', grad: 'linear-gradient(135deg,#4cc9f0,#4361ee)', desc: 'Python cheatsheet, notebooks, data types, loops, functions, OOP and beginner projects.' },
+    'html & css':  { icon: 'fab fa-html5', grad: 'linear-gradient(135deg,#f72585,#4361ee)', desc: 'HTML tags, forms, tables. CSS styling, flexbox, grid, and short notes cheatsheets.' },
+    'c language, dos & git': { icon: 'fas fa-terminal', grad: 'linear-gradient(135deg,#22c55e,#16a34a)', desc: 'C fundamentals, DOS/CMD commands reference and Git cheatsheet for beginners.' },
+    'digital marketing': { icon: 'fas fa-bullhorn', grad: 'linear-gradient(135deg,#083fd7,#ff0000)', desc: 'Digital marketing introduction, email marketing, Google Ads, YouTube Ads and Facebook Ads.' },
+    'adc':     { icon: 'fas fa-laptop', grad: 'linear-gradient(135deg,#4361ee,#3a0ca3)', title: 'Advance Diploma in Computer (ADC)', desc: 'Advanced applications, office tools, programming basics, and project work over a comprehensive curriculum.' },
+    'dca':     { icon: 'fas fa-desktop', grad: 'linear-gradient(135deg,#f72585,#b5179e)', title: 'Diploma in Computer Applications (DCA)', desc: 'Computer basics, MS Office, internet fundamentals, and introductory programming for beginners.' },
+    'web dev': { icon: 'fab fa-html5', grad: 'linear-gradient(135deg,#7209b7,#560bad)', title: 'Web Development Course', desc: 'HTML, CSS, JavaScript, responsive design, and a final project to build your own website.' },
+    'html/css':{ icon: 'fab fa-html5', grad: 'linear-gradient(135deg,#4361ee,#3a0ca3)', title: 'Web Design Projects', desc: 'Portfolios, landing pages, and mini websites built with pure HTML & CSS. Great for beginners.' },
+    'php':     { icon: 'fab fa-php', grad: 'linear-gradient(135deg,#f72585,#b5179e)', title: 'PHP Web Applications', desc: 'Login systems, student management, and dynamic sites powered by PHP and MySQL.' },
+    'java':    { icon: 'fab fa-java', grad: 'linear-gradient(135deg,#22c55e,#16a34a)', title: 'Java Projects', desc: 'Console and GUI Java projects – calculators, quiz apps, and inventory management systems.' }
+  };
+  const PALETTE = [
+    'linear-gradient(135deg,#4361ee,#3a0ca3)', 'linear-gradient(135deg,#f72585,#b5179e)',
+    'linear-gradient(135deg,#7209b7,#560bad)', 'linear-gradient(135deg,#22c55e,#16a34a)',
+    'linear-gradient(135deg,#f77f00,#d62828)', 'linear-gradient(135deg,#4cc9f0,#4361ee)'
+  ];
+  function metaFor(cat, count) {
+    const key = cat.toLowerCase().trim();
+    if (CATEGORY_META[key]) return CATEGORY_META[key];
+    let h = 0; for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+    return { icon: 'fas fa-folder-open', grad: PALETTE[h % PALETTE.length], desc: count + (count === 1 ? ' resource' : ' resources') + ' available in this category.' };
+  }
 
-  // CONTACT FORM
+  /* =====================================================================
+     RENDER
+     ===================================================================== */
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function emptyState(msg) {
+    const d = el('div', 'empty-state');
+    d.innerHTML = '<i class="fas fa-hourglass-half"></i>';
+    d.appendChild(document.createTextNode(msg));
+    return d;
+  }
+  function makeCard(cat, list) {
+    const meta = metaFor(cat, list.length);
+    const card = el('div', 'card fade-in');
+    const ic = el('div', 'note-icon'); ic.style.background = meta.grad;
+    ic.innerHTML = '<i class="' + meta.icon + '"></i>';
+    card.appendChild(ic);
+    card.appendChild(el('div', 'note-title', meta.title || cat));
+    card.appendChild(el('div', 'note-desc', meta.desc));
+
+    const sel = el('select', 'topic-select');
+    const first = el('option', '', 'Select Topic'); first.value = '';
+    sel.appendChild(first);
+    list.forEach((it, i) => { const o = el('option', '', it.name); o.value = String(i); sel.appendChild(o); });
+    card.appendChild(sel);
+
+    const row = el('div'); row.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap';
+    const btn = el('button', 'btn btn-primary btn-sm');
+    btn.innerHTML = '<i class="fas fa-external-link-alt"></i> Visit';
+    btn.addEventListener('click', () => {
+      if (sel.value === '') { alert('Please select a topic first!'); return; }
+      const it = list[+sel.value];
+      if (!it.link) { alert('This item is coming soon.'); return; }
+      openViewer(it.link, it.name);
+    });
+    row.appendChild(btn);
+    card.appendChild(row);
+    return card;
+  }
+  function renderGrid(gridId, items, emptyMsg) {
+    const grid = document.getElementById(gridId);
+    grid.innerHTML = '';
+    if (!items.length) { grid.appendChild(emptyState(emptyMsg)); return; }
+    const groups = new Map();
+    items.forEach(it => {
+      const k = it.category || 'General';
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(it);
+    });
+    groups.forEach((list, cat) => grid.appendChild(makeCard(cat, list)));
+  }
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const SECTION_WORD = { notes: 'notes', syllabus: 'syllabus', projects: 'project', papers: 'question paper' };
+
+  function renderUpdates(all) {
+    const list = [];
+    all.forEach(it => {
+      if (it.section === 'updates') {
+        list.push({ title: it.name, desc: it.category, link: it.link, date: it.date });
+      } else if (it.date) {
+        list.push({ title: 'New ' + SECTION_WORD[it.section] + ': ' + it.name, desc: it.category, link: it.link, date: it.date, openIt: true, name: it.name });
+      }
+    });
+    list.sort((a, b) => (b.date ? b.date.getTime() : 0) - (a.date ? a.date.getTime() : 0));
+    const box = document.getElementById('updatesList');
+    box.innerHTML = '';
+    if (!list.length) { box.appendChild(emptyState('No updates yet. Check back soon!')); return; }
+    list.slice(0, 6).forEach(u => {
+      const item = el('div', 'update-item fade-in');
+      const d = el('div', 'update-date');
+      d.appendChild(el('div', 'update-day', u.date ? String(u.date.getDate()).padStart(2, '0') : '--'));
+      d.appendChild(el('div', 'update-mon', u.date ? MONTHS[u.date.getMonth()] : ''));
+      item.appendChild(d);
+      const body = el('div');
+      body.appendChild(el('div', 'update-title', u.title));
+      if (u.desc) body.appendChild(el('div', 'update-desc', u.desc));
+      if (u.link) {
+        const a = el('a', 'btn btn-outline btn-sm', u.link.charAt(0) === '#' ? 'View' : 'Open');
+        if (u.link.charAt(0) === '#') a.href = u.link;
+        else { a.href = '#'; a.addEventListener('click', e => { e.preventDefault(); openViewer(u.link, u.name || u.title); }); }
+        body.appendChild(a);
+      }
+      item.appendChild(body);
+      box.appendChild(item);
+    });
+  }
+  function setStat(id, n) {
+    const wrap = document.getElementById(id + 'Wrap');
+    document.getElementById(id).textContent = n;
+    if (wrap) wrap.style.display = n > 0 ? '' : 'none';
+  }
+  function render(text) {
+    const all = toItems(text);
+    const by = s => all.filter(i => i.section === s);
+    renderGrid('notesGrid', by('notes'), 'Notes are coming soon.');
+    renderGrid('syllabusGrid', by('syllabus'), 'Syllabus will be uploaded soon.');
+    renderGrid('projectsGrid', by('projects'), 'Projects will be uploaded soon.');
+    renderGrid('papersGrid', by('papers'), 'Question papers will be uploaded soon.');
+    renderUpdates(all);
+    setStat('statNotes', by('notes').length);
+    setStat('statProjects', by('projects').length);
+    setStat('statPapers', by('papers').length);
+    observeFades();
+  }
+
+  /* =====================================================================
+     LOAD
+     ===================================================================== */
+  (function load() {
+    const KEY = 'lscti-sheet-csv';
+    let cached = null;
+    if (SHEET_CSV_URL) { try { cached = localStorage.getItem(KEY); } catch (e) {} }
+    render(cached || FALLBACK_CSV);
+    if (!SHEET_CSV_URL) return;
+    fetch(SHEET_CSV_URL, { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(text => {
+        if (!toItems(text).length) return;          // khali/galat data aaye to purana hi rehne do
+        try { localStorage.setItem(KEY, text); } catch (e) {}
+        if (text !== cached) render(text);
+      })
+      .catch(err => console.warn('Sheet load failed, using saved data:', err));
+  })();
+
+  /* =====================================================================
+     CONTACT FORM
+     ===================================================================== */
   function sendMsg(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-    // Form se data uthao
     const name    = e.target.querySelector('input[type="text"]').value;
     const phone   = e.target.querySelector('input[type="tel"]').value;
     const email   = e.target.querySelector('input[type="email"]').value;
     const subject = e.target.querySelector('select').value;
     const message = e.target.querySelector('textarea').value;
 
-    // WhatsApp message banana
-    const text = `*New Contact Form Message* 🔔
-    *Name:* ${name}
-    *Phone:* ${phone || 'Not provided'}
-    *Email:* ${email}
-    *Subject:* ${subject || 'Not selected'}
-    *Message:* ${message}`;
+    const text = '*New Contact Form Message* 🔔\n' +
+      '*Name:* ' + name + '\n' +
+      '*Phone:* ' + (phone || 'Not provided') + '\n' +
+      '*Email:* ' + email + '\n' +
+      '*Subject:* ' + (subject || 'Not selected') + '\n' +
+      '*Message:* ' + message;
 
     setTimeout(() => {
-      // WhatsApp pe bhejo
-      window.open(`https://wa.me/919289882752?text=${encodeURIComponent(text)}`, '_blank');
-
-      // Success message dikhao
+      window.open('https://wa.me/919289882752?text=' + encodeURIComponent(text), '_blank');
       const success = document.getElementById('formSuccess');
       success.style.display = 'block';
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
@@ -835,7 +935,6 @@ QUESTION PAPERS
       setTimeout(() => { success.style.display = 'none'; }, 5000);
     }, 1200);
   }
-
 </script>
 </body>
 </html>
