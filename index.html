@@ -4,8 +4,8 @@
   <link rel="shortcut icon" href="images/favicon2.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="LSCTI – Life Set Computer Training Institute. Free computer notes, PDFs, projects and question papers for every student." />
-  <meta name="keywords" content="LSCTI, computer notes, PDF, python, HTML, CSS, tally, excel, question papers, free" />
+  <meta name="description" content="LSCTI – Life Set Computer Training Institute. Free computer notes, PDFs, syllabus and projects for every student." />
+  <meta name="keywords" content="LSCTI, computer notes, PDF, python, HTML, CSS, tally, excel, syllabus, projects, free" />
   <meta name="author" content="LSCTI" />
   <title>LSCTI – Life Set Computer Training Institute</title>
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
@@ -101,12 +101,13 @@
     .hero-visual{display:flex;justify-content:center;align-items:center}
 
     /* NOTES / CARDS */
-    .notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+    .notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
     .note-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;margin-bottom:16px}
     .note-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px}
     .note-desc{font-size:.83rem;color:var(--text2);margin-bottom:16px;line-height:1.55}
-    .topic-select{width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--input-bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;cursor:pointer;margin-bottom:16px;transition:border var(--tr)}
-    .topic-select:focus{border-color:var(--accent)}
+    .doc-card{cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;padding:24px}
+    .doc-card .note-title{margin-bottom:18px;line-height:1.35;font-size:1.02rem}
+    .doc-card .btn{margin-top:auto}
     .empty-state{grid-column:1/-1;text-align:center;padding:34px 20px;border:1.5px dashed var(--border);border-radius:var(--radius);color:var(--text2);font-size:.93rem;background:var(--surface)}
     .empty-state i{display:block;font-size:1.6rem;color:var(--accent);margin-bottom:10px}
 
@@ -115,16 +116,6 @@
     .badge-pink{background:rgba(247,37,133,.12);color:var(--accent3)}
     .sp-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px}
     .sp-desc{font-size:.83rem;color:var(--text2);margin-bottom:18px;line-height:1.6}
-
-    /* UPDATES */
-    .updates-list{display:flex;flex-direction:column;gap:20px;max-width:700px;margin:0 auto}
-    .update-item{display:flex;gap:20px;align-items:flex-start;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:all var(--tr)}
-    .update-item:hover{border-color:var(--accent);transform:translateX(4px)}
-    .update-date{min-width:54px;text-align:center;background:var(--grad);color:#fff;border-radius:10px;padding:8px 6px;line-height:1.2}
-    .update-day{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800}
-    .update-mon{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;opacity:.9}
-    .update-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;margin-bottom:5px}
-    .update-desc{font-size:.83rem;color:var(--text2);line-height:1.55;margin-bottom:10px}
 
     /* CONTACT */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
@@ -236,8 +227,6 @@
       <li><a href="#notes">Notes</a></li>
       <li><a href="#syllabus">Syllabus</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#papers">Papers</a></li>
-      <li><a href="#updates">Updates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
@@ -253,8 +242,6 @@
   <a href="#notes" onclick="closeMob()">Notes</a>
   <a href="#syllabus" onclick="closeMob()">Syllabus</a>
   <a href="#projects" onclick="closeMob()">Projects</a>
-  <a href="#papers" onclick="closeMob()">Papers</a>
-  <a href="#updates" onclick="closeMob()">Updates</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
   <a href="/login.html" target="_blank" style="color:#25d366;font-weight:700;background-color:var(--bg2);">Login</a>
 </div>
@@ -269,7 +256,7 @@
       <div class="fade-in">
         <div class="hero-badge"><span class="dot"></span> Free for every student – Always</div>
         <h1 class="hero-title">Life Set Computer<br><span class="grad">Training Institute</span></h1>
-        <p class="hero-desc">Free computer notes, PDFs, projects & question papers — organized by topic, updated regularly, completely free for every student.</p>
+        <p class="hero-desc">Free computer notes, PDFs, syllabus & projects — organized by topic, updated regularly, completely free for every student.</p>
         <div class="hero-actions">
           <a href="#notes" class="btn btn-primary"><i class="fas fa-book-open"></i> Explore Notes</a>
           <a href="https://wa.me/919289882752" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Chat with Us</a>
@@ -277,7 +264,6 @@
         <div class="hero-stats">
           <div id="statNotesWrap"><div class="stat-num" id="statNotes">20+</div><div class="stat-label">Notes</div></div>
           <div id="statProjectsWrap"><div class="stat-num" id="statProjects">0</div><div class="stat-label">Projects</div></div>
-          <div id="statPapersWrap"><div class="stat-num" id="statPapers">0</div><div class="stat-label">Question Papers</div></div>
           <div><div class="stat-num">100%</div><div class="stat-label">Free Access</div></div>
         </div>
       </div>
@@ -326,9 +312,34 @@
     <div class="section-header fade-in">
       <div class="section-tag"><i class="fas fa-file-alt"></i> Study Notes</div>
       <h2 class="section-title">Computer <span>Notes & PDFs</span></h2>
-      <p class="section-desc">Topic-wise notes organized by subject. Select a topic and open it instantly.</p>
+      <p class="section-desc">Topic-wise notes organized by subject. Click any box to open the notes instantly.</p>
     </div>
     <div class="notes-grid" id="notesGrid"></div>
+  </div>
+</section>
+
+
+<!-- SYLLABUS (auto-filled from the Sheet) -->
+<section id="syllabus" class="alt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fas fa-graduation-cap"></i> Syllabus</div>
+      <h2 class="section-title">Course <span>Syllabus</span></h2>
+      <p class="section-desc">Click any box to open the complete course syllabus.</p>
+    </div>
+    <div class="notes-grid" id="syllabusGrid"></div>
+  </div>
+</section>
+
+<!-- PROJECTS (auto-filled from the Sheet) -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag"><i class="fas fa-code"></i> Projects</div>
+      <h2 class="section-title">Student <span>Projects</span></h2>
+      <p class="section-desc">Student project files and source code. Click any box to open.</p>
+    </div>
+    <div class="notes-grid" id="projectsGrid"></div>
   </div>
 </section>
 
@@ -348,54 +359,6 @@
         <span class="btn btn-primary btn-sm"><i class="fas fa-external-link-alt"></i> Open</span>
       </div>
     </a>
-  </div>
-</section>
-
-<!-- SYLLABUS (auto-filled from the Sheet) -->
-<section id="syllabus" class="alt">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-graduation-cap"></i> Syllabus</div>
-      <h2 class="section-title">Course <span>Syllabus</span></h2>
-      <p class="section-desc">Select your course and explore the complete syllabus with topic-wise breakdown.</p>
-    </div>
-    <div class="notes-grid" id="syllabusGrid"></div>
-  </div>
-</section>
-
-<!-- PROJECTS (auto-filled from the Sheet) -->
-<section id="projects">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-code"></i> Projects</div>
-      <h2 class="section-title">Student <span>Projects</span></h2>
-      <p class="section-desc">Source code and demos of HTML/CSS, PHP and Java projects.</p>
-    </div>
-    <div class="notes-grid" id="projectsGrid"></div>
-  </div>
-</section>
-
-<!-- PAPERS (auto-filled from the Sheet) -->
-<section id="papers" class="alt">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-file-pen"></i> Papers</div>
-      <h2 class="section-title">Question <span>Papers</span></h2>
-      <p class="section-desc">Previous question papers, organized by subject for easy practice.</p>
-    </div>
-    <div class="notes-grid" id="papersGrid"></div>
-  </div>
-</section>
-
-<!-- UPDATES (auto-filled from the Sheet) -->
-<section id="updates">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-tag"><i class="fas fa-bell"></i> Updates</div>
-      <h2 class="section-title">Recent <span>Updates</span></h2>
-      <p class="section-desc">Stay up to date with the latest additions and improvements to the LSCTI library.</p>
-    </div>
-    <div class="updates-list" id="updatesList"></div>
   </div>
 </section>
 
@@ -512,14 +475,12 @@
           <li><a href="#notes">Notes & PDFs</a></li>
           <li><a href="#syllabus">Syllabus</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#papers">Question Papers</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Quick Links</div>
         <ul class="footer-links">
           <li><a href="#hero">Home</a></li>
-          <li><a href="#updates">Updates</a></li>
           <li><a href="practical hub.html">Practical Hub</a></li>
           <li><a href="#contact">Request Notes</a></li>
         </ul>
@@ -563,35 +524,11 @@
   /* =====================================================================
      SETTINGS  –  sirf ye ek line kabhi badalni hai
      Google Sheet ka "Publish to web" wala CSV link yahan quotes ke andar paste karo.
-     Khali chhodoge to neeche wala FALLBACK_CSV (purane notes) dikhega.
      ===================================================================== */
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRttX7OcCyxU5GzGQbuQGIKFKd-88jAjUoRp67uFp2LbpWssatQNyi3C73vyaAhlzmqVeoHhZ9zRxjM/pub?gid=0&single=true&output=csv';
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTEyJSaw-KfvJ-EglEJLQKK9ojjC6IWcqxXWq2jdSIN9wFgHl6Tp8JhEdQ2FaCEjs2tZC3MOdUPytce/pub?gid=0&single=true&output=csv';
 
-  /* Backup data (Sheet na chale tab bhi site khali nahi dikhegi) */
-  const FALLBACK_CSV = `Section,Category,Name,Link,Date
-Notes,Computer Fundamental & Basic Software,Computer Fundamentals,notes/20_Computer_funda&parts.html,
-Notes,Computer Fundamental & Basic Software,Notepad,notes/01_notepad.html,
-Notes,Computer Fundamental & Basic Software,Wordpad,notes/02_wordpad.html,
-Notes,Computer Fundamental & Basic Software,Paint,notes/03_paint.html,
-Notes,MS Office,Word,notes/17_word.html,
-Notes,MS Office,Excel,notes/04_excel.html,
-Notes,MS Office,PowerPoint,notes/18_power_point.html,
-Notes,MS Office,MS Access,notes/16_ms access.html,
-Notes,MS Office,Types of Charts,notes/07_charts.html,
-Notes,MS Office,Data Analysis & Statistics,notes/08_data analysis & statics.html,
-Notes,Tally Prime,Tally Prime Full Notes,notes/05_tally.html,
-Notes,Python,Python Cheatsheet,notes/06_python-cheetsheet.html,
-Notes,Python,Python Notebook,notes/15_python notebok.html,
-Notes,HTML & CSS,HTML Full Notes,notes/10_html.html,
-Notes,HTML & CSS,HTML Short Notes,notes/11_html-shortnotes.html,
-Notes,HTML & CSS,CSS Short Notes,notes/13_css shortnotes.html,
-"Notes","C Language, DOS & Git",C Language,notes/09_c.html,
-"Notes","C Language, DOS & Git",DOS (CMD),notes/12_dos.html,
-"Notes","C Language, DOS & Git",Git Cheatsheet,notes/14_git cheetsheet.html,
-Notes,Digital Marketing,Email Marketing,notes/19_email_marketing.html,
-Updates,Digital Marketing section now has Email Marketing notes.,New notes uploaded: Email Marketing,#notes,20-05-2025
-Updates,50 Excel functions with categories.,New: 50 Excel Functions,#notes,26-05-2025
-Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practical,01-06-2025`;
+  /* Sheet na chale aur koi purani saved copy bhi na ho, tab ye khali rehta hai */
+  const FALLBACK_CSV = '';
 
   /* =====================================================================
      THEME / NAV / MISC
@@ -691,7 +628,8 @@ Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practi
 
   /* =====================================================================
      SHEET  ->  DATA
-     Columns:  Section | Category | Name | Link | Date
+     Columns:  Category | Name | Link
+     Category me Notes / Syllabus / Projects likho: isse tay hota hai box kis section me jayega.
      ===================================================================== */
   function parseCSV(t) {
     const rows = []; let row = [], f = '', q = false;
@@ -714,8 +652,6 @@ Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practi
     if (s.startsWith('note')) return 'notes';
     if (s.startsWith('syl')) return 'syllabus';
     if (s.startsWith('proj')) return 'projects';
-    if (s.startsWith('paper') || s.startsWith('question')) return 'papers';
-    if (s.startsWith('update')) return 'updates';
     return '';
   }
   function safeLink(l) {
@@ -723,60 +659,55 @@ Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practi
     if (/^(javascript|data|vbscript):/i.test(l)) return '';
     return l;
   }
-  function parseDate(s) {
-    s = (s || '').trim(); if (!s) return null;
-    let m = s.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})$/);
-    if (m) return new Date(+m[3], +m[2] - 1, +m[1]);
-    m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-    if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
-    return null;
-  }
   function toItems(text) {
     const rows = parseCSV(text);
-    if (rows.length && /^section$/i.test((rows[0][0] || '').trim())) rows.shift();
+    let off = 0;
+    if (rows.length) {
+      const h = (rows[0][0] || '').trim().toLowerCase();
+      if (h === 'category' || h === 'section') { if (h === 'section') off = 1; rows.shift(); }
+    }
     const items = [];
     rows.forEach(r => {
       const section = normSection(r[0]);
-      const category = (r[1] || '').trim();
-      const name = (r[2] || '').trim();
+      const name = (r[1 + off] || '').trim();
       if (!section || !name) return;
-      items.push({ section, category, name, link: safeLink(r[3]), date: parseDate(r[4]) });
+      items.push({ section, name, link: safeLink(r[2 + off]) });
     });
     return items;
   }
 
   /* =====================================================================
-     LOOK OF EACH CATEGORY CARD  (naya category aaye to bhi default look milega)
+     BOX KA LOOK  (icon naam se apne aap chunta hai, rang har box ka alag)
      ===================================================================== */
-  const CATEGORY_META = {
-    'computer fundamental & basic software': { icon: 'fas fa-file-alt', grad: 'linear-gradient(135deg,#4361ee,#3a0ca3)', desc: 'Basic text editors – shortcuts, formatting tips, and beginner exercises for all tools.' },
-    'ms office':   { icon: 'fas fa-paint-brush', grad: 'linear-gradient(135deg,#f72585,#b5179e)', desc: 'MS Word, Excel formulas, PowerPoint, charts, data analysis & statistics notes.' },
-    'tally prime': { icon: 'fas fa-calculator', grad: 'linear-gradient(135deg,#7209b7,#560bad)', desc: 'Accounting software basics – companies, vouchers, balance sheets, and GST entries.' },
-    'python':      { icon: 'fab fa-python', grad: 'linear-gradient(135deg,#4cc9f0,#4361ee)', desc: 'Python cheatsheet, notebooks, data types, loops, functions, OOP and beginner projects.' },
-    'html & css':  { icon: 'fab fa-html5', grad: 'linear-gradient(135deg,#f72585,#4361ee)', desc: 'HTML tags, forms, tables. CSS styling, flexbox, grid, and short notes cheatsheets.' },
-    'c language, dos & git': { icon: 'fas fa-terminal', grad: 'linear-gradient(135deg,#22c55e,#16a34a)', desc: 'C fundamentals, DOS/CMD commands reference and Git cheatsheet for beginners.' },
-    'digital marketing': { icon: 'fas fa-bullhorn', grad: 'linear-gradient(135deg,#083fd7,#ff0000)', desc: 'Digital marketing introduction, email marketing, Google Ads, YouTube Ads and Facebook Ads.' },
-    'adc':     { icon: 'fas fa-laptop', grad: 'linear-gradient(135deg,#4361ee,#3a0ca3)', title: 'Advance Diploma in Computer (ADC)', desc: 'Advanced applications, office tools, programming basics, and project work over a comprehensive curriculum.' },
-    'dca':     { icon: 'fas fa-desktop', grad: 'linear-gradient(135deg,#f72585,#b5179e)', title: 'Diploma in Computer Applications (DCA)', desc: 'Computer basics, MS Office, internet fundamentals, and introductory programming for beginners.' },
-    'web dev': { icon: 'fab fa-html5', grad: 'linear-gradient(135deg,#7209b7,#560bad)', title: 'Web Development Course', desc: 'HTML, CSS, JavaScript, responsive design, and a final project to build your own website.' },
-    'html/css':{ icon: 'fab fa-html5', grad: 'linear-gradient(135deg,#4361ee,#3a0ca3)', title: 'Web Design Projects', desc: 'Portfolios, landing pages, and mini websites built with pure HTML & CSS. Great for beginners.' },
-    'php':     { icon: 'fab fa-php', grad: 'linear-gradient(135deg,#f72585,#b5179e)', title: 'PHP Web Applications', desc: 'Login systems, student management, and dynamic sites powered by PHP and MySQL.' },
-    'java':    { icon: 'fab fa-java', grad: 'linear-gradient(135deg,#22c55e,#16a34a)', title: 'Java Projects', desc: 'Console and GUI Java projects – calculators, quiz apps, and inventory management systems.' }
-  };
   const PALETTE = [
     'linear-gradient(135deg,#4361ee,#3a0ca3)', 'linear-gradient(135deg,#f72585,#b5179e)',
     'linear-gradient(135deg,#7209b7,#560bad)', 'linear-gradient(135deg,#22c55e,#16a34a)',
     'linear-gradient(135deg,#f77f00,#d62828)', 'linear-gradient(135deg,#4cc9f0,#4361ee)'
   ];
-  function metaFor(cat, count) {
-    const key = cat.toLowerCase().trim();
-    if (CATEGORY_META[key]) return CATEGORY_META[key];
-    let h = 0; for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
-    return { icon: 'fas fa-folder-open', grad: PALETTE[h % PALETTE.length], desc: count + (count === 1 ? ' resource' : ' resources') + ' available in this category.' };
+  const SECTION_ICON = { notes: 'fas fa-file-lines', syllabus: 'fas fa-graduation-cap', projects: 'fas fa-code' };
+  const NAME_ICONS = [
+    [/market|seo|email|\bads?\b/i, 'fas fa-bullhorn'],
+    [/python/i, 'fab fa-python'],
+    [/php/i, 'fab fa-php'],
+    [/java/i, 'fab fa-java'],
+    [/html|css|web/i, 'fab fa-html5'],
+    [/excel|spreadsheet/i, 'fas fa-table'],
+    [/\bword\b/i, 'fas fa-file-word'],
+    [/power ?point|\bppt\b/i, 'fas fa-file-powerpoint'],
+    [/tally|account|\bgst\b/i, 'fas fa-calculator'],
+    [/\bc\b|\bdos\b|\bcmd\b|\bgit\b/i, 'fas fa-terminal'],
+    [/access|database|\bsql\b/i, 'fas fa-database'],
+    [/chart|statistic|analysis/i, 'fas fa-chart-pie'],
+    [/paint/i, 'fas fa-paint-brush'],
+    [/notepad|wordpad/i, 'fas fa-file-alt']
+  ];
+  function iconFor(it) {
+    for (const [re, ic] of NAME_ICONS) if (re.test(it.name)) return ic;
+    return SECTION_ICON[it.section];
   }
 
   /* =====================================================================
-     RENDER
+     RENDER  (har row = ek box)
      ===================================================================== */
   function el(tag, cls, text) {
     const e = document.createElement(tag);
@@ -790,80 +721,25 @@ Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practi
     d.appendChild(document.createTextNode(msg));
     return d;
   }
-  function makeCard(cat, list) {
-    const meta = metaFor(cat, list.length);
-    const card = el('div', 'card fade-in');
-    const ic = el('div', 'note-icon'); ic.style.background = meta.grad;
-    ic.innerHTML = '<i class="' + meta.icon + '"></i>';
+  function makeCard(it, i) {
+    const card = el('div', 'card doc-card fade-in');
+    const ic = el('div', 'note-icon'); ic.style.background = PALETTE[i % PALETTE.length];
+    ic.innerHTML = '<i class="' + iconFor(it) + '"></i>';
     card.appendChild(ic);
-    card.appendChild(el('div', 'note-title', meta.title || cat));
-    card.appendChild(el('div', 'note-desc', meta.desc));
-
-    const sel = el('select', 'topic-select');
-    const first = el('option', '', 'Select Topic'); first.value = '';
-    sel.appendChild(first);
-    list.forEach((it, i) => { const o = el('option', '', it.name); o.value = String(i); sel.appendChild(o); });
-    card.appendChild(sel);
-
-    const row = el('div'); row.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap';
+    card.appendChild(el('div', 'note-title', it.name));
     const btn = el('button', 'btn btn-primary btn-sm');
-    btn.innerHTML = '<i class="fas fa-external-link-alt"></i> Visit';
-    btn.addEventListener('click', () => {
-      if (sel.value === '') { alert('Please select a topic first!'); return; }
-      const it = list[+sel.value];
-      if (!it.link) { alert('This item is coming soon.'); return; }
-      openViewer(it.link, it.name);
-    });
-    row.appendChild(btn);
-    card.appendChild(row);
+    btn.type = 'button';
+    btn.innerHTML = it.link ? '<i class="fas fa-external-link-alt"></i> Open' : '<i class="fas fa-clock"></i> Coming soon';
+    card.appendChild(btn);
+    if (it.link) card.addEventListener('click', () => openViewer(it.link, it.name));
+    else card.style.cursor = 'default';
     return card;
   }
   function renderGrid(gridId, items, emptyMsg) {
     const grid = document.getElementById(gridId);
     grid.innerHTML = '';
     if (!items.length) { grid.appendChild(emptyState(emptyMsg)); return; }
-    const groups = new Map();
-    items.forEach(it => {
-      const k = it.category || 'General';
-      if (!groups.has(k)) groups.set(k, []);
-      groups.get(k).push(it);
-    });
-    groups.forEach((list, cat) => grid.appendChild(makeCard(cat, list)));
-  }
-  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const SECTION_WORD = { notes: 'notes', syllabus: 'syllabus', projects: 'project', papers: 'question paper' };
-
-  function renderUpdates(all) {
-    const list = [];
-    all.forEach(it => {
-      if (it.section === 'updates') {
-        list.push({ title: it.name, desc: it.category, link: it.link, date: it.date });
-      } else if (it.date) {
-        list.push({ title: 'New ' + SECTION_WORD[it.section] + ': ' + it.name, desc: it.category, link: it.link, date: it.date, openIt: true, name: it.name });
-      }
-    });
-    list.sort((a, b) => (b.date ? b.date.getTime() : 0) - (a.date ? a.date.getTime() : 0));
-    const box = document.getElementById('updatesList');
-    box.innerHTML = '';
-    if (!list.length) { box.appendChild(emptyState('No updates yet. Check back soon!')); return; }
-    list.slice(0, 6).forEach(u => {
-      const item = el('div', 'update-item fade-in');
-      const d = el('div', 'update-date');
-      d.appendChild(el('div', 'update-day', u.date ? String(u.date.getDate()).padStart(2, '0') : '--'));
-      d.appendChild(el('div', 'update-mon', u.date ? MONTHS[u.date.getMonth()] : ''));
-      item.appendChild(d);
-      const body = el('div');
-      body.appendChild(el('div', 'update-title', u.title));
-      if (u.desc) body.appendChild(el('div', 'update-desc', u.desc));
-      if (u.link) {
-        const a = el('a', 'btn btn-outline btn-sm', u.link.charAt(0) === '#' ? 'View' : 'Open');
-        if (u.link.charAt(0) === '#') a.href = u.link;
-        else { a.href = '#'; a.addEventListener('click', e => { e.preventDefault(); openViewer(u.link, u.name || u.title); }); }
-        body.appendChild(a);
-      }
-      item.appendChild(body);
-      box.appendChild(item);
-    });
+    items.forEach((it, i) => grid.appendChild(makeCard(it, i)));
   }
   function setStat(id, n) {
     const wrap = document.getElementById(id + 'Wrap');
@@ -876,11 +752,8 @@ Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practi
     renderGrid('notesGrid', by('notes'), 'Notes are coming soon.');
     renderGrid('syllabusGrid', by('syllabus'), 'Syllabus will be uploaded soon.');
     renderGrid('projectsGrid', by('projects'), 'Projects will be uploaded soon.');
-    renderGrid('papersGrid', by('papers'), 'Question papers will be uploaded soon.');
-    renderUpdates(all);
     setStat('statNotes', by('notes').length);
     setStat('statProjects', by('projects').length);
-    setStat('statPapers', by('papers').length);
     observeFades();
   }
 
@@ -888,7 +761,7 @@ Updates,Upcoming Tally entries and practicals.,Upcoming Tally practicals,#Practi
      LOAD
      ===================================================================== */
   (function load() {
-    const KEY = 'lscti-sheet-csv';
+    const KEY = 'lscti-sheet-csv-v2';
     let cached = null;
     if (SHEET_CSV_URL) { try { cached = localStorage.getItem(KEY); } catch (e) {} }
     render(cached || FALLBACK_CSV);
